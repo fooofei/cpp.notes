@@ -1,0 +1,3 @@
+key:_NT_SYMBOL_PATH
+SRV*D:\windbg_symbols
+srv*http://msdl.microsoft.com/download/symbols
