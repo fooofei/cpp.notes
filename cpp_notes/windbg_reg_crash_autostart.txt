@@ -1,0 +1,2 @@
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug
+Debuger = "C:\Program Files\Windows Kits\8.1\Debuggers\x64\windbg.exe" -p %ld -e %ld -g
