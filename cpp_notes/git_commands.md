@@ -14,4 +14,4 @@ origin	git@github.com:fooofei/cpp_notes.git (push)
 
 4、提交新文件和改动 `git add ` ; `git commit -m "comments"`
 
-5、推送到远程 `git push`
+5、推送到远程 `git push` , 推送失败就用 `git push origin master`
