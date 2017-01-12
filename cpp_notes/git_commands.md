@@ -1,4 +1,5 @@
 
+把本地文件推送到 github 的过程：
 
 1、在远程建立空仓库
 
@@ -10,7 +11,8 @@
 origin	git@github.com:fooofei/cpp_notes.git (fetch)
 origin	git@github.com:fooofei/cpp_notes.git (push)
 ```
-则表示成功
+则表示成功.
+如果不成功，要手动 set-url , `git remote set-url origin git@github.com:fooofei/cpp_notes.git`
 
 4、提交新文件和改动 `git add ` ; `git commit -m "comments"`
 
