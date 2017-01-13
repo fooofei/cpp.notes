@@ -1,5 +1,5 @@
 
-
+https://github.com/google/sanitizers
 
 模式 1、你的程序仅仅是一个二进制（可执行程序），比如最简单的 g++ 1.c ,
 
