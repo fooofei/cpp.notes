@@ -1,3 +1,4 @@
+~~~c++
 struct node_t
 {
     int data;
@@ -60,3 +61,4 @@ int main(int argc, const TCHAR ** argv)
 
     return 0;
 }
+~~~
