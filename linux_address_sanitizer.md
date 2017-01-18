@@ -43,7 +43,9 @@ https://github.com/google/sanitizers/wiki/AddressSanitizer
 * 缺陷
 ~~~c++
 无法检测栈空间越界
+
 int x[4];
 x[4]=9;
-以上代码检测不到
+
+以上代码  gcc-5(5.4)检测不到, gcc-6 可以检测到。
 ~~~
