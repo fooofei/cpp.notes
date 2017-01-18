@@ -3,7 +3,7 @@ https://github.com/google/sanitizers
 
 https://github.com/google/sanitizers/wiki/AddressSanitizer
 
-* 支持版本  Clang (3.3+) and GCC (4.8+).
+* 支持版本  Clang (3.3+) and GCC (4.8+). 还是 gcc6 更好，建议升级到最新版本。
 
 * 模式 1、你的程序仅仅是一个二进制（可执行程序），比如最简单的 `g++ 1.c` ,
 ~~~
