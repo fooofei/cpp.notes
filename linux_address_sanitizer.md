@@ -27,4 +27,11 @@ https://github.com/google/sanitizers
 	出现异常时，看不到出现异常的代码文件和行号，则运行时，继续增加前缀 
 	
     `ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.8 ASAN_OPTIONS=symbolize=1`
-	
+
+* 缺陷
+~~~c++
+无法检测栈空间越界
+int x[4];
+x[4]=9;
+以上代码检测不到
+~~~
