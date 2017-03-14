@@ -1,6 +1,7 @@
 
 posix 平台获取文件大小采取的方案(代码块):
 ```cpp
+    // DWORD = unsigned int
     struct stat buf;
 	int err = fstat(fd, &buf);
 	if (err)
