@@ -1,5 +1,5 @@
-
-* host = Windows, vmware guest = Ubuntu 16.04.2, ²»ÄÜÔÚ¹²ÏíÄ¿Â¼ /mnt/hgfs ÖĞÊ¹ÓÃ git clone.
+ï»¿
+* host = Windows, vmware guest = Ubuntu 16.04.2, ä¸èƒ½åœ¨å…±äº«ç›®å½• /mnt/hgfs ä¸­ä½¿ç”¨ git clone.
 ```
 Cannot git clone to VMWare shared folder
 http://stackoverflow.com/questions/33393077/cannot-git-clone-to-vmware-shared-folder
