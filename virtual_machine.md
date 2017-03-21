@@ -18,6 +18,13 @@ http://serverfault.com/questions/225155/virtualbox-how-to-set-up-networking-so-b
 如果没有自动挂载成功，或者无法访问到，是因为目录挂载到了 `vboxsf` 组，需要把当前用户加入该组：
 ```
 usermod -a -G vboxsf <your_user_name>
+usermod -> /usr/sbin/usermod
 校验是否加入成功, 当前用户的所有组:
 groups <your_user_name>
+```
+
+* VirtualBox 镜像 VMWare 互转 
+```
+https://www.howtogeek.com/125640/how-to-convert-virtual-machines-between-virtualbox-and-vmware/
+https://www.maketecheasier.com/convert-virtual-machines-vmware-virtualbox/
 ```
