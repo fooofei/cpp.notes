@@ -113,7 +113,7 @@ struct Base
 struct Derived : public Base
 {
 
-    using Base::error; # 注意这句
+    using Base::error; //注意这句
 
     void error()
     {
