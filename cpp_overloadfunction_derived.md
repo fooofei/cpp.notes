@@ -112,7 +112,7 @@ struct Base
 
 struct Derived : public Base
 {
-    *using Base::error;*
+    \*using Base::error;*\
     void error()
     {
         std::cout<<"Derived::error()"<<endl;
