@@ -1,9 +1,9 @@
+﻿
+* 同名虚函数的出现顺序。
+同一个类中，同名的虚函数出现顺序。
+此问题由一个新手在参与项目开发时，在即有接口中增加同名函数引起。
 
-* ͬ���麯���ĳ���˳��
-ͬһ�����У�ͬ�����麯������˳��
-��������һ�������ڲ�����Ŀ����ʱ���ڼ��нӿ�������ͬ����������
-
-���Խ��
+测试结果
 ```	
 	class Test
 	{
@@ -14,10 +14,10 @@
 	}
 
 ```
-Vistual studio 2012, 2015 �汾��֤: ���麯�����У��� `void func1(int)` �� `void func1(void *)` ��ǰ�档
-�����ǵ��򣬵��� gcc �в��������ġ�
+Vistual studio 2012, 2015 版本验证: 在虚函数表中，是 `void func1(int)` 在 `void func1(void *)` 的前面。
+甚至是倒序，但在 gcc 中不是这样的。
 
-* �����ַ
+* 父类地址
 
 ```
 struct IA
@@ -66,6 +66,6 @@ int main(int argc, const TCHAR ** argv)
     return 0;
 }
 ```
-dynamic_cast ������`��1`ָ��ת��`��2`ָ�롣
-pa pb ��ַ��� 4 �� �� x86 platform.
-��ˣ���ʵ�� `QueryInterface()` ʱ��Ӧ��ʹ�� *pv = static_cast<����ָ��>(����ָ��-this));
+dynamic_cast 可用于`父1`指针转到`父2`指针。
+pa pb 地址相差 4 ， 在 x86 platform.
+因此，在实现 `QueryInterface()` 时，应该使用 *pv = static_cast<父类指针>(子类指针-this));

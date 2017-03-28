@@ -1,19 +1,19 @@
+ï»¿
+æŠŠæœ¬åœ°æ–‡ä»¶æ¨é€åˆ° github çš„è¿‡ç¨‹ï¼š
 
-°Ñ±¾µØÎÄ¼şÍÆËÍµ½ github µÄ¹ı³Ì£º
+1ã€åœ¨è¿œç¨‹å»ºç«‹ç©ºä»“åº“
 
-1¡¢ÔÚÔ¶³Ì½¨Á¢¿Õ²Ö¿â
+2ã€åœ¨æœ¬åœ°å»ºç«‹æ–‡ä»¶å¤¹ï¼Œåœ¨æ–‡ä»¶å¤¹é‡Œä¿å­˜å†…å®¹ã€‚
 
-2¡¢ÔÚ±¾µØ½¨Á¢ÎÄ¼ş¼Ğ£¬ÔÚÎÄ¼ş¼ĞÀï±£´æÄÚÈİ¡£
-
-3¡¢¹ØÁª±¾µØ²Ö¿âºÍÔ¶³Ì²Ö¿â : `cd ±¾µØ²Ö¿â` ; `git remote add origin  git@github.com:fooofei/cpp_notes.git `
-Ê¹ÓÃ `git remote -v `²é¿´¹ØÁª½á¹û£¬Èç¹ûÎª £º
+3ã€å…³è”æœ¬åœ°ä»“åº“å’Œè¿œç¨‹ä»“åº“ : `cd æœ¬åœ°ä»“åº“` ; `git remote add origin  git@github.com:fooofei/cpp_notes.git `
+ä½¿ç”¨ `git remote -v `æŸ¥çœ‹å…³è”ç»“æœï¼Œå¦‚æœä¸º ï¼š
 ```
 origin	git@github.com:fooofei/cpp_notes.git (fetch)
 origin	git@github.com:fooofei/cpp_notes.git (push)
 ```
-Ôò±íÊ¾³É¹¦.
-Èç¹û²»³É¹¦£¬ÒªÊÖ¶¯ set-url , `git remote set-url origin git@github.com:fooofei/cpp_notes.git`
+åˆ™è¡¨ç¤ºæˆåŠŸ.
+å¦‚æœä¸æˆåŠŸï¼Œè¦æ‰‹åŠ¨ set-url , `git remote set-url origin git@github.com:fooofei/cpp_notes.git`
 
-4¡¢Ìá½»ĞÂÎÄ¼şºÍ¸Ä¶¯ `git add ` ; `git commit -m "comments"`
+4ã€æäº¤æ–°æ–‡ä»¶å’Œæ”¹åŠ¨ `git add ` ; `git commit -m "comments"`
 
-5¡¢ÍÆËÍµ½Ô¶³Ì `git push` , ÍÆËÍÊ§°Ü¾ÍÓÃ `git push origin master`
+5ã€æ¨é€åˆ°è¿œç¨‹ `git push` , æ¨é€å¤±è´¥å°±ç”¨ `git push origin master`

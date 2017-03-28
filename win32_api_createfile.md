@@ -1,23 +1,23 @@
-тзнд╪Ч╠╩╢Р©╙╧Щё╛╡╒ц╩сп╧ь╠уй╠ё╛╧╡оМ╤а╦цнд╪Ч╣д╥╫╥╗║ё
+О╩©Е°╗Ф√┤Д╩╤Х╒╚Ф┴⌠Е╪─Х©┤О╪▄Е╧╤Ф╡║Ф°┴Е┘ЁИ≈╜Ф≈╤О╪▄Е┘╠Д╨╚Х╞╩Х╞╔Ф√┤Д╩╤Г └Ф√╧ФЁ∙Ц─┌
 https://support.microsoft.com/en-us/kb/316609
 
 
-1 | ╤ап╢╠Й╪г | ╧╡оМ╠Й╪г
+1 | Х╞╩Е├≥Ф═┤Х╝╟ | Е┘╠Д╨╚Ф═┤Х╝╟
 ----|----|----
-╣зр╩╢н╢Р©╙ | GENERIC_READ &#124; GENERIC_WRITE | 0
-╣з╤Ч╢н╢Р©╙ | GENERIC_READ |║║FILE_SHARE_READ║║or FILE_SHARE_WRITE or FILE_SHARE_READ &#124; FILE_SHARE_WRITE й╖╟э
+Г╛╛Д╦─Ф╛║Ф┴⌠Е╪─ | GENERIC_READ &#124; GENERIC_WRITE | 0
+Г╛╛Д╨▄Ф╛║Ф┴⌠Е╪─ | GENERIC_READ |Ц──FILE_SHARE_READЦ──or FILE_SHARE_WRITE or FILE_SHARE_READ &#124; FILE_SHARE_WRITE Е╓╠Х╢╔
 
-2 | ╤ап╢╠Й╪г | ╧╡оМ╠Й╪г
+2 | Х╞╩Е├≥Ф═┤Х╝╟ | Е┘╠Д╨╚Ф═┤Х╝╟
 ----|----|----
-╣зр╩╢н╢Р©╙ | GENERIC_READ &#124; GENERIC_WRITE | FILE_SHARE_READ
-╣з╤Ч╢н╢Р©╙ | GENERIC_READ |║║FILE_SHARE_READ║║or FILE_SHARE_WRITE or FILE_SHARE_READ &#124; FILE_SHARE_WRITE й╖╟э
+Г╛╛Д╦─Ф╛║Ф┴⌠Е╪─ | GENERIC_READ &#124; GENERIC_WRITE | FILE_SHARE_READ
+Г╛╛Д╨▄Ф╛║Ф┴⌠Е╪─ | GENERIC_READ |Ц──FILE_SHARE_READЦ──or FILE_SHARE_WRITE or FILE_SHARE_READ &#124; FILE_SHARE_WRITE Е╓╠Х╢╔
 
- 3 | ╤ап╢╠Й╪г | ╧╡оМ╠Й╪г
+ 3 | Х╞╩Е├≥Ф═┤Х╝╟ | Е┘╠Д╨╚Ф═┤Х╝╟
  ----|----|----
-╣зр╩╢н╢Р©╙ | GENERIC_READ &#124; GENERIC_WRITE | FILE_SHARE_WRITE
-╣з╤Ч╢н╢Р©╙ | GENERIC_READ |║║FILE_SHARE_READ║║or FILE_SHARE_WRITE or or FILE_SHARE_READ &#124; FILE_SHARE_WRITE й╖╟э
+Г╛╛Д╦─Ф╛║Ф┴⌠Е╪─ | GENERIC_READ &#124; GENERIC_WRITE | FILE_SHARE_WRITE
+Г╛╛Д╨▄Ф╛║Ф┴⌠Е╪─ | GENERIC_READ |Ц──FILE_SHARE_READЦ──or FILE_SHARE_WRITE or or FILE_SHARE_READ &#124; FILE_SHARE_WRITE Е╓╠Х╢╔
 
-4 | ╤ап╢╠Й╪г | ╧╡оМ╠Й╪г
+4 | Х╞╩Е├≥Ф═┤Х╝╟ | Е┘╠Д╨╚Ф═┤Х╝╟
 ----|----|----
-╣зр╩╢н╢Р©╙ | GENERIC_READ &#124; GENERIC_WRITE | FILE_SHARE_READ &#124; FILE_SHARE_WRITE
-╣з╤Ч╢н╢Р©╙ | GENERIC_READ |║║FILE_SHARE_READ й╖╟э FILE_SHARE_WRITE й╖╟э FILE_SHARE_READ &#124; FILE_SHARE_WRITE Ёи╧╕
+Г╛╛Д╦─Ф╛║Ф┴⌠Е╪─ | GENERIC_READ &#124; GENERIC_WRITE | FILE_SHARE_READ &#124; FILE_SHARE_WRITE
+Г╛╛Д╨▄Ф╛║Ф┴⌠Е╪─ | GENERIC_READ |Ц──FILE_SHARE_READ Е╓╠Х╢╔ FILE_SHARE_WRITE Е╓╠Х╢╔ FILE_SHARE_READ &#124; FILE_SHARE_WRITE Ф┬░Е┼÷

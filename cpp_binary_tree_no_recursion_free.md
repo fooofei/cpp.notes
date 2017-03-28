@@ -1,4 +1,4 @@
-~~~c++
+﻿~~~c++
 struct node_t
 {
     int data;

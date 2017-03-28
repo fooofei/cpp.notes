@@ -1,51 +1,51 @@
-
+ï»¿
 https://github.com/google/sanitizers
 
 https://github.com/google/sanitizers/wiki/AddressSanitizer
 
-* Ö§³Ö°æ±¾  Clang (3.3+) and GCC (4.8+). »¹ÊÇ gcc6 ¸üºÃ£¬½¨ÒéÉı¼¶µ½×îĞÂ°æ±¾¡£
+* æ”¯æŒç‰ˆæœ¬  Clang (3.3+) and GCC (4.8+). è¿˜æ˜¯ gcc6 æ›´å¥½ï¼Œå»ºè®®å‡çº§åˆ°æœ€æ–°ç‰ˆæœ¬ã€‚
 
-* Ä£Ê½ 1¡¢ÄãµÄ³ÌĞò½ö½öÊÇÒ»¸ö¶ş½øÖÆ£¨¿ÉÖ´ĞĞ³ÌĞò£©£¬±ÈÈç×î¼òµ¥µÄ `g++ 1.c` ,
+* æ¨¡å¼ 1ã€ä½ çš„ç¨‹åºä»…ä»…æ˜¯ä¸€ä¸ªäºŒè¿›åˆ¶ï¼ˆå¯æ‰§è¡Œç¨‹åºï¼‰ï¼Œæ¯”å¦‚æœ€ç®€å•çš„ `g++ 1.c` ,
 ~~~
-ÄÇÃ´¾ÍÔÚ±àÒëµÄÊ±ºò¼Ó `-fsanitize=address`, ×îÖÕÎª `g++ -fsanitize=address  1.c`.
+é‚£ä¹ˆå°±åœ¨ç¼–è¯‘çš„æ—¶å€™åŠ  `-fsanitize=address`, æœ€ç»ˆä¸º `g++ -fsanitize=address  1.c`.
 ~~~
 
-* Ä£Ê½ 2¡¢³ÌĞòÔËĞĞÄ£Ê½ÊÇ ¶ş½øÖÆ£¨¿ÉÖ´ĞĞ³ÌĞò£©+¶¯Ì¬¿â .so £¬ÎÒÃÇÏëÒª·ÖÎö¶¯Ì¬¿â so ÎÄ¼ş¡£
+* æ¨¡å¼ 2ã€ç¨‹åºè¿è¡Œæ¨¡å¼æ˜¯ äºŒè¿›åˆ¶ï¼ˆå¯æ‰§è¡Œç¨‹åºï¼‰+åŠ¨æ€åº“ .so ï¼Œæˆ‘ä»¬æƒ³è¦åˆ†æåŠ¨æ€åº“ so æ–‡ä»¶ã€‚
 ~~~
-ÄÇÃ´ 
+é‚£ä¹ˆ 
 
-  a. ÔÚ±àÒë so ÎÄ¼şÊ±£¬¼ÓÈçÏÂ²ÎÊı
+  a. åœ¨ç¼–è¯‘ so æ–‡ä»¶æ—¶ï¼ŒåŠ å¦‚ä¸‹å‚æ•°
   
   `CXXFLAGS+= -O1 -g -DNDEBUG  -fsanitize=address`
-  gcc-6: `-fsanitize-recover=address` ¶¨Î»µ½ 1 ¸öÎÊÌâºó¿ÉÒÔ²»Í£Ö¹ÔËĞĞ£¬¼ÌĞøÔËĞĞµ±Ç°³ÌĞò
+  gcc-6: `-fsanitize-recover=address` å®šä½åˆ° 1 ä¸ªé—®é¢˜åå¯ä»¥ä¸åœæ­¢è¿è¡Œï¼Œç»§ç»­è¿è¡Œå½“å‰ç¨‹åº
   
 	
-  b. Á´½Ó .o ÎÄ¼şÎª .so ÎÄ¼şµÄÊ±ºò£¬¼Ó 
+  b. é“¾æ¥ .o æ–‡ä»¶ä¸º .so æ–‡ä»¶çš„æ—¶å€™ï¼ŒåŠ  
   
   `-g -fno-omit-frame-pointer -fsanitize=address -fsanitize-recover=address -lasan`
   
-   Á´½ÓºóÒªÊ¹ÓÃ `ldd -r [.so path]` ²é¿´Éú³ÉµÄ so ÎÄ¼şÊÇ·ñÓĞ·ûºÅÎ´Á´½Ó£¬Èç¹ûÓĞasanµÄ£¬Òª»Øµ½ a£¬ ÖØĞÂ±àÒë£¬¼ÓÇ°×º
+   é“¾æ¥åè¦ä½¿ç”¨ `ldd -r [.so path]` æŸ¥çœ‹ç”Ÿæˆçš„ so æ–‡ä»¶æ˜¯å¦æœ‰ç¬¦å·æœªé“¾æ¥ï¼Œå¦‚æœæœ‰asançš„ï¼Œè¦å›åˆ° aï¼Œ é‡æ–°ç¼–è¯‘ï¼ŒåŠ å‰ç¼€
 	 
    `export  LD_LIBRARY_PATH=/usr/lib/clang/3.8.0/lib/linux & make -j8`
 	 
-  c. ÔËĞĞÊ±¼ÓÇ°×º 
-  `SAN_OPTIONS=halt_on_error=0` Å×³öÎÊÌâºó²»Í£Ö¹ÔËĞĞ
+  c. è¿è¡Œæ—¶åŠ å‰ç¼€ 
+  `SAN_OPTIONS=halt_on_error=0` æŠ›å‡ºé—®é¢˜åä¸åœæ­¢è¿è¡Œ
   
-  gcc-5:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/5/libasan.so` £¬
-  gcc-6:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6/libasan.so` / `LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6.2.0/libasan.so` £¬
+  gcc-5:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/5/libasan.so` ï¼Œ
+  gcc-6:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6/libasan.so` / `LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6.2.0/libasan.so` ï¼Œ
   
-  Õâ¸ö so µÄÂ·¾¢Òª×Ô¼ºÕÒ¡£
+  è¿™ä¸ª so çš„è·¯åŠ²è¦è‡ªå·±æ‰¾ã€‚
     
-	³öÏÖÒì³£Ê±£¬¿´²»µ½³öÏÖÒì³£µÄ´úÂëÎÄ¼şºÍĞĞºÅ£¬ÔòÔËĞĞÊ±£¬¼ÌĞøÔö¼ÓÇ°×º 
+	å‡ºç°å¼‚å¸¸æ—¶ï¼Œçœ‹ä¸åˆ°å‡ºç°å¼‚å¸¸çš„ä»£ç æ–‡ä»¶å’Œè¡Œå·ï¼Œåˆ™è¿è¡Œæ—¶ï¼Œç»§ç»­å¢åŠ å‰ç¼€ 
 	
     `ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.8 ASAN_OPTIONS=symbolize=1`
 ~~~
-* È±Ïİ
+* ç¼ºé™·
 ~~~c++
-ÎŞ·¨¼ì²âÕ»¿Õ¼äÔ½½ç
+æ— æ³•æ£€æµ‹æ ˆç©ºé—´è¶Šç•Œ
 
 int x[4];
 x[4]=9;
 
-ÒÔÉÏ´úÂë  gcc-5(5.4)¼ì²â²»µ½, gcc-6 ¿ÉÒÔ¼ì²âµ½¡£
+ä»¥ä¸Šä»£ç   gcc-5(5.4)æ£€æµ‹ä¸åˆ°, gcc-6 å¯ä»¥æ£€æµ‹åˆ°ã€‚
 ~~~

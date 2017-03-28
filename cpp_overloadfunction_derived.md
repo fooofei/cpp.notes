@@ -1,7 +1,7 @@
+ï»¿
+# C++ å…·æœ‰é‡è½½å‡½æ•°çš„ç±»åœ¨ç»§æ‰¿æ—¶çš„è¡¨ç°
 
-# C++ ¾ßÓĞÖØÔØº¯ÊıµÄÀàÔÚ¼Ì³ĞÊ±µÄ±íÏÖ
-
-¿¼ÂÇÏÂÃæµÄ´úÂëÆ¬¶Î£º(ÎªÊéĞ´¼ò±ã£¬`class` ¹Ø¼ü×ÖÒ»ÂÉÊ¹ÓÃ `struct` )
+è€ƒè™‘ä¸‹é¢çš„ä»£ç ç‰‡æ®µï¼š(ä¸ºä¹¦å†™ç®€ä¾¿ï¼Œ`class` å…³é”®å­—ä¸€å¾‹ä½¿ç”¨ `struct` )
 
 ```cpp
 struct Base
@@ -24,16 +24,16 @@ int main()
 {
     Derived d;
     d.error(); // Derived::error()
-    d.error(1); // ´íÎó
+    d.error(1); // é”™è¯¯
     return 0;
 }
 
 ```
-»ò
+æˆ–
 ```cpp
 struct Base
 {
-    virtual void error() // ÊÇ·ñÊÇ virtual ½á¹ûÒ»Ñù
+    virtual void error() // æ˜¯å¦æ˜¯ virtual ç»“æœä¸€æ ·
     {
         std::cout<<"Base::error()"<<endl;
     }
@@ -56,20 +56,20 @@ int main()
 {
     Derived d;
     d.error(); // Derived::error()
-    //d.error(1); // ´íÎó
+    //d.error(1); // é”™è¯¯
     return 0;
 }
 
 ```
-×¢Òâµ½ Base ÊÇ»ùÀà£¬ÓĞÍ¬ÃûµÄ·½·¨£¬ÕâÊÇÔÚÖØÔØ£¬Í¬Ê±×÷Îª×ÓÀàµÄ Derived ¸²¸ÇÁË»ùÀàµÄ Base::error() ·½·¨, µ«ÊÇ¸¸ÀàµÄÁíÒ»¸ö·½·¨ Base::error(int ) È´Ã»ÓĞ¼Ì³ĞÏÂÀ´£¬
+æ³¨æ„åˆ° Base æ˜¯åŸºç±»ï¼Œæœ‰åŒåçš„æ–¹æ³•ï¼Œè¿™æ˜¯åœ¨é‡è½½ï¼ŒåŒæ—¶ä½œä¸ºå­ç±»çš„ Derived è¦†ç›–äº†åŸºç±»çš„ Base::error() æ–¹æ³•, ä½†æ˜¯çˆ¶ç±»çš„å¦ä¸€ä¸ªæ–¹æ³• Base::error(int ) å´æ²¡æœ‰ç»§æ‰¿ä¸‹æ¥ï¼Œ
 
-ÎÒÃÇÔÚ Derived ÀàÖĞÎŞ·¨ÒÔ <Derived¶ÔÏó>.error(1) µÄĞÎÊ½µ÷ÓÃ¡£
+æˆ‘ä»¬åœ¨ Derived ç±»ä¸­æ— æ³•ä»¥ <Derivedå¯¹è±¡>.error(1) çš„å½¢å¼è°ƒç”¨ã€‚
 
-Õâ¸öÒ³ÃæÓĞÒ»¸ö½âÊÍ£º
+è¿™ä¸ªé¡µé¢æœ‰ä¸€ä¸ªè§£é‡Šï¼š
 
 http://stackoverflow.com/questions/1628768/why-does-an-overridden-function-in-the-derived-class-hide-other-overloads-of-the
 
-Ëû½âÊÍËµ£¬Èç¹ûÓĞÒÔÏÂ´úÂë£º
+ä»–è§£é‡Šè¯´ï¼Œå¦‚æœæœ‰ä»¥ä¸‹ä»£ç ï¼š
 ```cpp
 struct Base
 {
@@ -89,17 +89,17 @@ struct Derived : public Base
     }
 };
 ```
-Èç¹ûÊ¹ÓÃ foo(NULL)£¬ÒòÎª NULL ±»¶¨ÎªÎª 0£¬ »á²úÉú²»ÖªµÀµ÷ÓÃÄÄ¸ö·½·¨µÄÆçÒå£¬ËùÒÔ£¬ C++ ²ÉÈ¡ "name hiding"£¨Ãû×ÖÒş²Ø£©
+å¦‚æœä½¿ç”¨ foo(NULL)ï¼Œå› ä¸º NULL è¢«å®šä¸ºä¸º 0ï¼Œ ä¼šäº§ç”Ÿä¸çŸ¥é“è°ƒç”¨å“ªä¸ªæ–¹æ³•çš„æ­§ä¹‰ï¼Œæ‰€ä»¥ï¼Œ C++ é‡‡å– "name hiding"ï¼ˆåå­—éšè—ï¼‰
 
-ÎÒÈÏÎªÕâÃ´½âÊÍÌ«Ç£Ç¿ÁË¡£Í¬Ò»¸öÀàÖĞÍ¬Ãû·½·¨Ò²ÊÇÓĞ¿ÉÄÜ¶¨ÒåµÄ¡£
+æˆ‘è®¤ä¸ºè¿™ä¹ˆè§£é‡Šå¤ªç‰µå¼ºäº†ã€‚åŒä¸€ä¸ªç±»ä¸­åŒåæ–¹æ³•ä¹Ÿæ˜¯æœ‰å¯èƒ½å®šä¹‰çš„ã€‚
 
-# ÆÆ½â
+# ç ´è§£
 
-¿ÉÒÔÕâÑùÊ¹ÓÃ¸¸ÀàµÄÍ¬Ãû·½·¨
+å¯ä»¥è¿™æ ·ä½¿ç”¨çˆ¶ç±»çš„åŒåæ–¹æ³•
 ```cpp
 struct Base
 {
-    virtual void error() // ÊÇ·ñÊÇ virtual ½á¹ûÒ»Ñù
+    virtual void error() // æ˜¯å¦æ˜¯ virtual ç»“æœä¸€æ ·
     {
         std::cout<<"Base::error()"<<endl;
     }
@@ -113,7 +113,7 @@ struct Base
 struct Derived : public Base
 {
 
-    using Base::error; //×¢ÒâÕâ¾ä
+    using Base::error; //æ³¨æ„è¿™å¥
 
     void error()
     {
@@ -125,7 +125,7 @@ int main()
 {
     Derived d;
     d.error(); // Derived::error()
-    d.error(1); // Í¨¹ı Base::error(int)
+    d.error(1); // é€šè¿‡ Base::error(int)
     return 0;
 }
 ```
