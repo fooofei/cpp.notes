@@ -42,7 +42,8 @@ Debug move /y "$(OutDir)\$(ProjectName).exe" "$(SolutionDir)\$(ProjectName)D.exe
 Release move /y "$(OutDir)\$(ProjectName).exe" "$(SolutionDir)\$(ProjectName).exe"   
 ```
 
-Build Event 复制文件
+## Build Event 复制文件
+```
 Debug 
 	copy /y "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)bin\$(TargetName)UD$(TargetExt)" 
 	copy /y "$(OutDir)$(TargetName).pdb" "$(SolutionDir)bin\$(TargetName)UD.pdb" 
@@ -60,3 +61,4 @@ ReleaseX64
 	copy /y "$(OutDir)$(TargetName)$(TargetExt)" "$(SolutionDir)bin\$(TargetName)64U$(TargetExt)"   
 	copy /y "$(OutDir)$(TargetName).pdb" "$(SolutionDir)bin\$(TargetName)64U.pdb"  
     copy /y "$(OutDir)$(TargetName).lib" "$(SolutionDir)bin\$(TargetName)64U.lib" 
+```
