@@ -23,6 +23,7 @@ int main()
 in Visual C++ 6.0
 
 asm:
+
 ![](cpp_i++_++i_vc6_asm.png)
 
 ![](cpp_i++_++i_vc6_asm_tu.png)
@@ -30,6 +31,7 @@ asm:
 in Visual Studio 2008
 
 asm:
+
 ![](cpp_i++_++i_vs2008_asm.png)
 
 ![](cpp_i++_++i_vs2008_asm_tu.png)
