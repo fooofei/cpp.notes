@@ -415,3 +415,8 @@ int  main()
 }
 
 ```
+
+
+指针优先级问题
+
+![cpp_priority](https://cloud.githubusercontent.com/assets/7028946/25372384/bce69a92-29c7-11e7-866c-a9a0ecc31af8.png)
