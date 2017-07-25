@@ -2,3 +2,5 @@
 Debuger = "C:\Program Files\Windows Kits\8.1\Debuggers\x64\windbg.exe" -p %ld -e %ld -g
 
 windbg.exe -I 也行
+
+一个两个 windbg.exe, x64 位注册后无效就 注册 x86 的
