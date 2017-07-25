@@ -25,6 +25,7 @@
 
 
 更改的那段代码
+```
 .text:013BE220                         sub_13BE220     proc near               ; CODE XREF: sub_409CA0j
 .text:013BE220
 .text:013BE220                         arg_0           = dword ptr  8
@@ -40,3 +41,4 @@
 .text:013BE231 5E                                      pop     esi
 .text:013BE232 5D                                      pop     ebp
 .text:013BE233 C2 08 00                                retn    8               ; Return Near from Procedure
+```
