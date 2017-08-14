@@ -81,3 +81,48 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 ## current CMakeLists.txt directory
 # CMAKE_HOME_DIRECTORY not reliable, it can be other CMakeLists.txt directory
 add_library(${PROJECT_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+
+
+## helper function
+function(print_all_variables)
+    get_cmake_property(_variableNames VARIABLES)
+    foreach (_variableName ${_variableNames})
+        message(STATUS "${_variableName}=${${_variableName}}")
+    endforeach()
+endfunction()
+
+
+## helper macros
+macro(append_variable dest args)
+    set(${dest} "${${dest}}${args}")
+endmacro()
+
+macro(append_cflags args)
+    #string(APPEND CMAKE_C_FLAGS ${args})
+    append_variable(CMAKE_C_FLAGS ${args})
+endmacro()
+
+macro(append_cxxflags args)
+    #string(APPEND CMAKE_CXX_FLAGS ${args})
+    append_variable(CMAKE_CXX_FLAGS ${args})
+endmacro()
+
+macro(append_cflags_debug args)
+    #string(APPEND CMAKE_C_FLAGS_DEBUG ${args})
+    append_variable(CMAKE_C_FLAGS_DEBUG ${args})
+endmacro()
+
+macro(append_cflags_release args)
+    #string(APPEND CMAKE_C_FLAGS_RELEASE ${args})
+    append_variable(CMAKE_C_FLAGS_RELEASE ${args})
+endmacro()
+
+macro(append_cxxflags_debug args)
+    #string(APPEND CMAKE_CXX_FLAGS_DEBUG ${args})
+    append_variable(CMAKE_CXX_FLAGS_DEBUG ${args})
+endmacro()
+
+macro(append_cxxflags_release args)
+    #string(APPEND CMAKE_CXX_FLAGS_RELEASE ${args})
+    append_variable(CMAKE_CXX_FLAGS_RELEASE ${args})
+endmacro()
