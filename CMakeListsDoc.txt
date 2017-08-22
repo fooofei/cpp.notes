@@ -46,6 +46,14 @@ target_link_libraries(${PROJECT_NAME} dl)
 target_link_libraries(${PROJECT_NAME} iconv)
 
 
+## add other library for static link
+# first add_subdirectory(), then target_link_libraries()
+if (NOT TARGET other_library)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../  build_other_library)
+endif ()
+target_link_libraries(${PROJECT_NAME} other_library)
+
+
 ## copy generate binary file, post build
 add_custom_command(
 TARGET ${PROJECT_NAME} POST_BUILD
@@ -76,6 +84,11 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 # mkdir build
 # cd build
 # cmake -DCMAKE_BUILD_TYPE=Debug ..
+
+## build config
+-DCMAKE_BUILD_TYPE=Debug/Release
+-DCMAKE_CXX_COMPILER=/usr/local/bin/afl-clang++
+-DCMAKE_C_COMPILER=/usr/local/bin/afl-clang
 
 
 ## current CMakeLists.txt directory
