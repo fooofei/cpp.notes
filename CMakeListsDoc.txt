@@ -17,8 +17,39 @@ if(WIN32)
 endif()
 
 
-## ?
+## set all after target CXX_STANDARD property, equivalent with add -std=gnu++11
+# to the compile flags, or -std=c++11
+# see this use way
+#
+# TARGET_A ...
+#  set(CMAKE_CXX_STANDARD 11)
+# TARGET_B ...
+#
+# it will add -std=gnu++11 to TARGET_B, not TARGET_A
+#
+# see this use way
+#
+#  set(CMAKE_CXX_STANDARD 11)
+# TARGET_A ...
+# TARGET_B ...
+#
+# it will add -std=gnu++11 to TARGET_B and TARGET_A
+# ref https://cmake.org/cmake/help/v3.1/prop_tgt/CXX_STANDARD.html#prop_tgt:CXX_STANDARD
 set(CMAKE_CXX_STANDARD 11)
+# recommand use this
+set_property(TARGET ${TARGET2} PROPERTY CXX_STANDARD 11)
+
+## Visual Studio special
+# add files to Visual Studio project files tree
+# if want to add .h files to visual studio, must add .h files to compile, such as
+# set(Source_files_files )
+# add_library(${PROJECT_NAME} STATIC ${Source_files_files})
+# or
+# target_sources(${PROJECT_NAME} PRIVATE ${Source_files_files})
+# if not use above, only use source_group(), will not show .h files
+# first arg `files` is the name in Visual Studio
+source_group(files FILES ${Source_files_files})
+
 
 
 ## add .h headers located directorys
@@ -37,6 +68,13 @@ target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/u16string
 ## add libs located directorys,
 # besides you must use target_link_libraries() to specific lib
 link_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+
+## add source code compile defines
+if (WIN32)
+    target_compile_definitions(${TARGET1} PRIVATE "UNICODE")
+    target_compile_definitions(${TARGET1} PRIVATE "_UNICODE")
+endif ()
 
 
 ## add source code compile options, same with gcc -fPIC
