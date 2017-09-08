@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 2.8.12)
+# cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.1)
 project(DEMO)
 
-
+!!! SAD. CMake document not say every command's minimun required version.
 
 ## show message
 message(STATUS "message write here")
@@ -62,7 +63,7 @@ target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 
 
 
-## add .cpp src files
+## add .cpp src files, target_sources is required 3.1 and above
 target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/u16string_bytes.cpp)
 
 ## add libs located directorys,
@@ -82,7 +83,20 @@ endif ()
 # https://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake
 # not use set(CMAKE_CXX_FLAGS "")
 # not use add_compile_options()
+if (NOT WIN32)
 target_compile_options(${PROJECT_NAME} PRIVATE -fPIC)
+endif()
+
+## <SAFETY> no export functions on gcc
+if (NOT WIN32)
+target_compile_options(${PROJECT_NAME} PRIVATE -fvisibility=hidden)
+endif()
+
+## generate .pdb files when build with MSVC
+# target_compile_options(${TARGET1} PRIVATE /Zi) is not work
+if(MSVC)
+    set_property(TARGET ${TARGET1}  APPEND PROPERTY LINK_FLAGS /DEBUG:FULL)
+endif()
 
 
 ## link other librarys, same with -ldl -liconv
@@ -104,6 +118,17 @@ TARGET ${PROJECT_NAME} POST_BUILD
 COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:${PROJECT_NAME}> ../>
 )
 
+
+## <SAFETY> remove symbol if release
+if (NOT WIN32 AND CMAKE_BUILD_TYPE)
+    string(TOUPPER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_UPPER)
+    if (CMAKE_BUILD_TYPE_UPPER MATCHES RELEASE)
+        add_custom_command(TARGET ${TARGET1} POST_BUILD
+                COMMAND ${CMAKE_STRIP} --strip-unneeded $<TARGET_FILE:${TARGET1}>
+                )
+
+    endif ()
+endif ()
 
 ## set the generate binary file externtion
 set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
