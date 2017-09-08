@@ -2,10 +2,15 @@
 cmake_minimum_required(VERSION 3.1)
 project(DEMO)
 
+
+
 !!! SAD. CMake document not say every command's minimun required version.
+
+
 
 ## show message
 message(STATUS "message write here")
+
 
 
 ## platform
@@ -16,6 +21,7 @@ if(APPLE)
 endif()
 if(WIN32)
 endif()
+
 
 
 ## set all after target CXX_STANDARD property, equivalent with add -std=gnu++11
@@ -66,9 +72,12 @@ target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 ## add .cpp src files, target_sources is required 3.1 and above
 target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/u16string_bytes.cpp)
 
+
+
 ## add libs located directorys,
 # besides you must use target_link_libraries() to specific lib
 link_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 
 
 ## add source code compile defines
@@ -78,7 +87,9 @@ if (WIN32)
 endif ()
 
 
+
 ## add source code compile options, same with gcc -fPIC
+# compile defines / compile options is different thing
 # most time use PRIVATE
 # https://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake
 # not use set(CMAKE_CXX_FLAGS "")
@@ -87,10 +98,14 @@ if (NOT WIN32)
 target_compile_options(${PROJECT_NAME} PRIVATE -fPIC)
 endif()
 
+
+
 ## <SAFETY> no export functions on gcc
 if (NOT WIN32)
 target_compile_options(${PROJECT_NAME} PRIVATE -fvisibility=hidden)
 endif()
+
+
 
 ## generate .pdb files when build with MSVC
 # target_compile_options(${TARGET1} PRIVATE /Zi) is not work
@@ -99,9 +114,11 @@ if(MSVC)
 endif()
 
 
+
 ## link other librarys, same with -ldl -liconv
 target_link_libraries(${PROJECT_NAME} dl)
 target_link_libraries(${PROJECT_NAME} iconv)
+
 
 
 ## add other library for static link
@@ -112,11 +129,13 @@ endif ()
 target_link_libraries(${PROJECT_NAME} other_library)
 
 
+
 ## copy generate binary file, at the time post build
 add_custom_command(
 TARGET ${PROJECT_NAME} POST_BUILD
 COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:${PROJECT_NAME}> ../>
 )
+
 
 
 ## <SAFETY> remove symbol if release
@@ -130,6 +149,8 @@ if (NOT WIN32 AND CMAKE_BUILD_TYPE)
     endif ()
 endif ()
 
+
+
 ## set the generate binary file externtion
 set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 
@@ -140,6 +161,8 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 # same with https://github.com/toeb/moderncmake/blob/772c45522e4fcc48f3d6cfdc9386981dfb75a8dc/Modern%20CMake.pdf
 # https://stackoverflow.com/questions/26037954/cmake-target-link-libraries-interface-dependencies
 # https://cmake.org/pipermail/cmake/2016-May/063400.html
+
+
 
 ## python dev
 # use `python-config --prefix` to get python path, not use
@@ -154,19 +177,25 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 # cd build
 # cmake -DCMAKE_BUILD_TYPE=Debug ..
 
-## build config
+
+
+## build posix config
 -DCMAKE_BUILD_TYPE=Debug/Release
 -DCMAKE_CXX_COMPILER=/usr/local/bin/afl-clang++
 -DCMAKE_C_COMPILER=/usr/local/bin/afl-clang
+
+
 
 ## build on Windows/x64
 cmake -G "Visual Studio 15 2017 Win64" ..
 cmake --build . --config Release
 
 
+
 ## current CMakeLists.txt directory
 # CMAKE_HOME_DIRECTORY not reliable, it can be other CMakeLists.txt directory
 add_library(${PROJECT_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+
 
 
 ## helper function
@@ -176,6 +205,7 @@ function(print_all_variables)
         message(STATUS "${_variableName}=${${_variableName}}")
     endforeach()
 endfunction()
+
 
 
 ## helper macros
