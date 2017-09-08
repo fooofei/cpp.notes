@@ -159,6 +159,10 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 -DCMAKE_CXX_COMPILER=/usr/local/bin/afl-clang++
 -DCMAKE_C_COMPILER=/usr/local/bin/afl-clang
 
+## build on Windows/x64
+cmake -G "Visual Studio 15 2017 Win64" ..
+cmake --build . --config Release
+
 
 ## current CMakeLists.txt directory
 # CMAKE_HOME_DIRECTORY not reliable, it can be other CMakeLists.txt directory
