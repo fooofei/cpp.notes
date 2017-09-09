@@ -166,10 +166,13 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 
 ## python dev
 # use `python-config --prefix` to get python path, not use
-# find_package() in python builtin module.
+# find_package() which is cmake builtin module.
 # a useage to see:
 # https://github.com/fooofei/py_string_address/blob/57991beef2a0379adeb252c6225b17dc1fb61588/CMakeLists.txt
-
+#
+# notice macOS'python installation with framework is
+# env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 2.7.13
+# macOS's native python cannot use to develop for SDK.
 
 
 ## builds
