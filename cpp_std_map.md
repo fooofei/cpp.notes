@@ -1,2 +1,4 @@
 ﻿
-* `std::map::insert` 使用时一定要先find是否已经有存在的了，不然如果插入的是申请后的内存，在不知道插入是否成功的情况下，会造成内存泄漏。
+- before use `std::map::insert`, you should use `std::map::find` to detect
+if it already exist. If already exist, and the memory is alloced, if not check,
+there will have a memory leak.

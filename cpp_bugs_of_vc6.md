@@ -1,18 +1,18 @@
-# ÔËËã·ûÖØÔØµÄÏŞÖÆ
+# è¿ç®—ç¬¦é‡è½½çš„é™åˆ¶
 ```  
-  £®¡¡¡¡£®*¡¡¡¡£º£º¡¡¡¡?£º¡¡¡¡sizeof    (Õâ5ÖÖÔËËã·û²»ÔÊĞíÖØÔØ)
-1>     ²»ÄÜ¸Ä±äÓÅÏÈ¼¶ºÍ½áºÏĞÔ Ò²²»ÄÜ¸Ä±ä²Ù×÷¶ÔÏóµÄÊıÄ¿
-2>     ²»ÄÜÊ¹ÓÃÄ¬ÈÏ²ÎÊı ±ØĞëÃ÷È·Ã¿¸ö²Ù×÷¶ÔÏó
-3>     ±ØĞë×÷ÓÃÓÚ×Ô¶¨ÒåÀàĞÍ, (ÇÒÏÔÊ½µÄÊ¹ÓÃ)ÖÁÉÙÓĞÒ»¸öÊÇÓÃ»§¶¨ÒåÀàĞÍ
-4>     ÖØÔØÔËËã·û()  []  ->  = ÖØÔØº¯Êı±ØĞëÉùÃ÷ÎªÀàµÄ³ÉÔ±º¯Êı
+  ï¼ã€€ã€€ï¼*ã€€ã€€ï¼šï¼šã€€ã€€?ï¼šã€€ã€€sizeof    (è¿™5ç§è¿ç®—ç¬¦ä¸å…è®¸é‡è½½)
+1>     ä¸èƒ½æ”¹å˜ä¼˜å…ˆçº§å’Œç»“åˆæ€§ ä¹Ÿä¸èƒ½æ”¹å˜æ“ä½œå¯¹è±¡çš„æ•°ç›®
+2>     ä¸èƒ½ä½¿ç”¨é»˜è®¤å‚æ•° å¿…é¡»æ˜ç¡®æ¯ä¸ªæ“ä½œå¯¹è±¡
+3>     å¿…é¡»ä½œç”¨äºè‡ªå®šä¹‰ç±»å‹, (ä¸”æ˜¾å¼çš„ä½¿ç”¨)è‡³å°‘æœ‰ä¸€ä¸ªæ˜¯ç”¨æˆ·å®šä¹‰ç±»å‹
+4>     é‡è½½è¿ç®—ç¬¦()  []  ->  = é‡è½½å‡½æ•°å¿…é¡»å£°æ˜ä¸ºç±»çš„æˆå‘˜å‡½æ•°
 ```
 
-## 1Ì·ºÆÇ¿ÊéÉÏµÄÀı×Ó
+## 1è°­æµ©å¼ºä¹¦ä¸Šçš„ä¾‹å­
 ```cpp
 #include <iostream>
 using namespace std;
 //class Complex;
-//Complex operator + (Complex& c1,Complex& c2);//  ¼úÈËÉÏÃæÕâÁ½¾äÊéÉÏÃ»ÓĞ ±àÒëÆ÷±¨´í¾­²éÑ¯ÊÇ±àÒëÆ÷µÄÎÊÌâÎ¢ÈíËµvc6.0 SP6ÒÑ¾­ĞŞ¸´µ«ÊÇÎÒµÄVisual 6.0»¹ÊÇ±¨´í
+//Complex operator + (Complex& c1,Complex& c2);//  è´±äººä¸Šé¢è¿™ä¸¤å¥ä¹¦ä¸Šæ²¡æœ‰ ç¼–è¯‘å™¨æŠ¥é”™ç»æŸ¥è¯¢æ˜¯ç¼–è¯‘å™¨çš„é—®é¢˜å¾®è½¯è¯´vc6.0 SP6å·²ç»ä¿®å¤ä½†æ˜¯æˆ‘çš„Visual 6.0è¿˜æ˜¯æŠ¥é”™
 //http://support.microsoft.com/kb/890892/zh-cn  
 class Complex
 {
@@ -28,7 +28,7 @@ public:
 		imag = i;
 	}
 	operator double ()  {return real;}
-	friend  Complex operator + (Complex& c1,Complex& c2);//²ÁÔõÃ´ÉùÃ÷ÎªÓÑÔªº¯Êı¾Í²»ĞĞÁËÄØ
+	friend  Complex operator + (Complex& c1,Complex& c2);//æ“¦æ€ä¹ˆå£°æ˜ä¸ºå‹å…ƒå‡½æ•°å°±ä¸è¡Œäº†å‘¢
 private:
 	double real;
 	double imag;
@@ -41,7 +41,7 @@ int main()
 {
 	Complex c1(3,4), c2(5,-19),c3;
 	double d;
-	d =  c1+2.5;  //Ò»¸ödouble ĞÍÊı¾İÓëComplexÀàÊı¾İÏà¼Ó
+	d =  c1+2.5;  //ä¸€ä¸ªdouble å‹æ•°æ®ä¸Complexç±»æ•°æ®ç›¸åŠ 
 	cout<<d<<endl;
 	//cout<<c1<<endl;
 	c3 = c1 + c2;
@@ -50,10 +50,10 @@ int main()
 }
 ```
 
-## 2 ÖØÔØ+¡¢<<ÔËËã·û
+## 2 é‡è½½+ã€<<è¿ç®—ç¬¦
 ```cpp
-// ÉùÃ÷£ºÕâ¶Î´úÂë·Åµ½Visual 6.0 Àï»á±àÒë´íÎó
-// ÒÔÏÂ´úÂëÔÚVisual 2008 ÖĞ²âÊÔÍ¨¹ı
+// å£°æ˜ï¼šè¿™æ®µä»£ç æ”¾åˆ°Visual 6.0 é‡Œä¼šç¼–è¯‘é”™è¯¯
+// ä»¥ä¸‹ä»£ç åœ¨Visual 2008 ä¸­æµ‹è¯•é€šè¿‡
 #include <iostream>
 #include <string>
 using namespace std;
@@ -69,8 +69,8 @@ public:
 		printf("Copy constructor called\n");
     };
     ~CPoint(){printf("Destructor called\n");};
-    friend CPoint operator+(CPoint &p1, CPoint &p2);    // Á½¸ö¶ÔÏóÏà¼Ó
-    friend CPoint operator+(int value, CPoint &p1);    // ¶ÔÏóºÍÖµµÄÏà¼Ó
+    friend CPoint operator+(CPoint &p1, CPoint &p2);    // ä¸¤ä¸ªå¯¹è±¡ç›¸åŠ 
+    friend CPoint operator+(int value, CPoint &p1);    // å¯¹è±¡å’Œå€¼çš„ç›¸åŠ 
     friend ostream &operator<<(ostream &os, CPoint &p1);
 private:
     int m_x;
@@ -94,7 +94,7 @@ CPoint operator+(CPoint &p1, CPoint &p2)
 	//return temp;
 	
 	return CPoint(p1.m_x+p2.m_x,p1.m_y+p2.m_y);
-	// ÕâÑùĞ´´úÂë¾Í±ÈÉÏÃæÉÙµ÷ÓÃÒ»´Î¿½±´£¬Ğ§ÂÊ¸ü¸ß
+	// è¿™æ ·å†™ä»£ç å°±æ¯”ä¸Šé¢å°‘è°ƒç”¨ä¸€æ¬¡æ‹·è´ï¼Œæ•ˆç‡æ›´é«˜
 }
  
 CPoint operator+(int value, CPoint &p1)
@@ -109,10 +109,10 @@ ostream &operator<<(ostream &os, CPoint &p1)
 }
 ```
 
-## 3 ÖØÔØ<<¡¢>> IOÁ÷
+## 3 é‡è½½<<ã€>> IOæµ
 
 ```cpp
-·Åµ½Visual 6.0 »á±¨´íµÄÅ¶
+æ”¾åˆ°Visual 6.0 ä¼šæŠ¥é”™çš„å“¦
 #include <iostream>
 #include <string>
 using namespace std;
@@ -123,15 +123,15 @@ private:
     int m_prefix;
     int m_value;
 public:
-	 // ÀûÓÃ³õÊ¼»¯ÁĞ±íÀ´³õÊ¼»¯³ÉÔ±¶ÔÏó
+	 // åˆ©ç”¨åˆå§‹åŒ–åˆ—è¡¨æ¥åˆå§‹åŒ–æˆå‘˜å¯¹è±¡
 	CTest():m_name(""),m_id(0),m_prefix(0),m_value(0){}
     CTest(string n, int a, int p, int nm):m_name(n), m_id(a), m_prefix(p), m_value(nm){}  
-	// ²Ù×÷·û±»¶¨ÒåÎª·Ç³ÉÔ±º¯ÊıÊ±£¬Òª½«Æä¶¨ÒåÎªËù²Ù×÷ÀàµÄÓÑÔ±º¯Êı
+	// æ“ä½œç¬¦è¢«å®šä¹‰ä¸ºéæˆå‘˜å‡½æ•°æ—¶ï¼Œè¦å°†å…¶å®šä¹‰ä¸ºæ‰€æ“ä½œç±»çš„å‹å‘˜å‡½æ•°
     friend ostream &operator<<(ostream &stream, CTest o);        
     friend istream &operator>>(istream &stream, CTest &o);    
 };
  
-//ÔÚÀàÀïÃæºÍÀàÍâÃæµÄÖØÔØµÄÇø±ğÔÚÓÚµÚ¶ş¸ö²ÎÊıµÄÓĞÎŞ
+//åœ¨ç±»é‡Œé¢å’Œç±»å¤–é¢çš„é‡è½½çš„åŒºåˆ«åœ¨äºç¬¬äºŒä¸ªå‚æ•°çš„æœ‰æ— 
 ostream &operator<<(ostream &stream, CTest o)
 {
     stream << o.m_name << " ";
@@ -157,22 +157,22 @@ istream &operator>>(istream &stream, CTest &o)
 int main()
 {
     CTest a;
-    cin>>a;        // Ïàµ±ÓÚoperator>>(cin, a)
-    cout<<a;                // Ïàµ±ÓÚoperator<<(cout, a)
+    cin>>a;        // ç›¸å½“äºoperator>>(cin, a)
+    cout<<a;                // ç›¸å½“äºoperator<<(cout, a)
     return 0;
 }
 
-ÊäÈëÊä³öÑùÀı
+è¾“å…¥è¾“å‡ºæ ·ä¾‹
 Enter name: hu
 Enter id: 1
 Enter prefix: 12
 Enter value: 1
 ```
 
-## 4 ÖØÔØÇ°ÖÃ×ÔÔö¡¢ºóÖÃ×ÔÔö¡¢Ç°ÖÃ×Ô¼õ¡¢ºóÖÃ×Ô¼õ
+## 4 é‡è½½å‰ç½®è‡ªå¢ã€åç½®è‡ªå¢ã€å‰ç½®è‡ªå‡ã€åç½®è‡ªå‡
 
 ```cpp
-·Åµ½Visual 6.0 »á±¨´íµÄÅ¶
+æ”¾åˆ°Visual 6.0 ä¼šæŠ¥é”™çš„å“¦
 #include <iostream>
 #include <algorithm>
 #include <iterator>
@@ -195,21 +195,21 @@ public:
 		m_value = i.m_value;
 		return *this;
 	}
-	//Ç°ÖÃ²Ù×÷·ûÖØÔØ
+	//å‰ç½®æ“ä½œç¬¦é‡è½½
 	CInt& operator++()
 	{	
 		++m_value;
 		return *this;
 	}
-	//Ç°ÖÃ²Ù×÷·ûÖØÔØ
+	//å‰ç½®æ“ä½œç¬¦é‡è½½
 	CInt& operator--()
 	{	
 		--m_value;
 		return *this;
 	}
-	//ºóÖÃ²Ù×÷·ûÖØÔØ
+	//åç½®æ“ä½œç¬¦é‡è½½
 	CInt operator++(int){	return CInt(m_value++);}
-	//ºóÖÃ²Ù×÷·ûÖØÔØ
+	//åç½®æ“ä½œç¬¦é‡è½½
 	CInt operator--(int){ 	return CInt(m_value--);}
 };
 ostream& operator<<(ostream& os, const CInt& i)
@@ -242,7 +242,7 @@ int main()
 	return 0;
 }
 
-Êä³ö½á¹û
+è¾“å‡ºç»“æœ
 Constructor called
 ++x=11
 x=11

@@ -1,3 +1,6 @@
-﻿key:_NT_SYMBOL_PATH
+﻿the file shows what set the Windows envirenment to use Windgb symbols
+
+key:_NT_SYMBOL_PATH
+values:
 SRV*D:\windbg_symbols
 srv*http://msdl.microsoft.com/download/symbols
