@@ -1,9 +1,7 @@
 ﻿
 
-大写转换为小写：
- 前提是大写字母：
- `c = c|0x20;`
- 
-小写转为大写：
- 前提是小写字母：
- `c = c & 0xdf;`
+upper case --> lower case:
+`c = c|0x20;`
+
+lower case --> upper case:
+`c = c & 0xdf;`

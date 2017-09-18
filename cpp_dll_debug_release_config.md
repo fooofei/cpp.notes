@@ -1,4 +1,10 @@
 ﻿
+the file is old times use of dll usage.
+
+If I need to make a dll, I will reference the file, 
+
+but not I have use cmake to organize my c++ project, no need this more.
+
 ## 如果只是使用Def文件导出，但是不用 dllimport 引入，就会无法使用#pragma lib隐式加载方式加载dll
 
 # Visual Studio 生成Console Dll 的 过程
