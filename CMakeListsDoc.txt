@@ -45,6 +45,11 @@ endif()
 set(CMAKE_CXX_STANDARD 11)
 # recommand use this
 set_property(TARGET ${TARGET2} PROPERTY CXX_STANDARD 11)
+# or
+set_target_properties(${TARGET2} PROPERTIES  CXX_STANDARD 11)
+# this is only use on non-Windows
+
+
 
 ## Visual Studio special
 # add files to Visual Studio project files tree
@@ -173,6 +178,7 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 # notice macOS'python installation with framework is
 # env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 2.7.13
 # macOS's native python cannot use to develop for SDK.
+
 
 
 ## builds
