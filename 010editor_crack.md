@@ -1,11 +1,11 @@
-﻿
+
 ## crack 010editor with ida
 
-1 open with ida , shift + F12 , open [Strings window],
+1 open with ida, shift + F12, open [Strings window]
 
-2 search a string starts with "Invalid name", use command x , jump to it.
+2 search a string startswith "Invalid name", use command `x`, jump to it.
 
-还有个字符串可以搜索 Password accepted. This license entitle
+还有个字符串可以搜索 "Password accepted" "This license entitle"
 
 3 跳转好几次，没办法描述了。写不下来，看到这的时候自己猜。从上面的字符串跳转到校验 key 的代码块。
 
