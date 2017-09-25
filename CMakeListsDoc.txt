@@ -156,8 +156,10 @@ endif ()
 
 
 
-## set the generate binary file externtion
+## set the generate binary file extension /rename
 set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
+# ref https://cmake.org/Wiki/CMake_Useful_Variables#System_.26_Compiler_Information
+# ref https://cmake.org/cmake/help/v3.0/manual/cmake-variables.7.html
 
 
 
