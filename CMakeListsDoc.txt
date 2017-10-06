@@ -156,6 +156,22 @@ endif ()
 
 
 
+## msvc static link runtime
+build static link runtime library, so the generate executable file can run
+on other machine, not occur runtime error
+How can I build my MSVC application with a static runtime?
+## when use this static link runtime, the sub modules also use static link,
+## we donnot need to set every sub module to static link
+https://cmake.org/Wiki/CMake_FAQ#How_can_I_build_my_MSVC_application_with_a_static_runtime.3F
+test it works
+or install "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community
+\VC\Redist\MSVC\14.11.25325\vcredist_x86.exe"
+
+also when need to build run on Windows XP, need pass options to cmake:
+cmake -G "Visual Studio 15 2017" -T v141_xp  ..
+
+
+
 ## set the generate binary file extension /rename
 set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 # ref https://cmake.org/Wiki/CMake_Useful_Variables#System_.26_Compiler_Information
@@ -200,7 +216,7 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 ## build on Windows/x64
 cmake -G "Visual Studio 15 2017 Win64" ..
 cmake --build . --config Release
-
+cmake -G "Visual Studio 15 2017" -T v141_xp  ..
 
 
 ## current CMakeLists.txt directory
