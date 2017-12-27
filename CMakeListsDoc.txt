@@ -269,3 +269,19 @@ macro(append_cxxflags_release args)
     #string(APPEND CMAKE_CXX_FLAGS_RELEASE ${args})
     append_variable(CMAKE_CXX_FLAGS_RELEASE ${args})
 endmacro()
+
+
+## install CMake
+
+one way to compile & install CMake is 
+
+download from https://cmake.org/files/v3.10/cmake-3.10.1.tar.gz
+
+```shell
+tar xvf ./cmake-3.10.1.tar.gz
+cd cmake-3.10.1
+./configure
+make -j8
+```
+
+or district download binary from https://cmake.org/files/v3.10/cmake-3.10.1-Linux-x86_64.tar.gz
