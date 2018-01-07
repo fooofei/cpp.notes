@@ -13,6 +13,12 @@ message(STATUS "message write here")
 
 
 
+## next's command use after this
+add_executable(${BINARY_NAME} {CMAKE_CURRENT_SOURCE_DIR}/main.c)
+add_library(${BINARY_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
+
+
+
 ## platform
 if(APPLE)
     # no warning
