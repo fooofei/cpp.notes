@@ -109,8 +109,9 @@ endif ()
 # not use add_compile_options()
 if (NOT WIN32)
 target_compile_options(${PROJECT_NAME} PRIVATE -fPIC)
+# for multi define global variables
+target_compile_options(${BINARY_NAME} PRIVATE -fno-common )
 endif()
-
 
 
 ## <SAFETY> no export functions on gcc
