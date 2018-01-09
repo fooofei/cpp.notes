@@ -26,6 +26,12 @@ if(APPLE)
     # https://stackoverflow.com/questions/31561309/cmake-warnings-under-os-x-macosx-rpath-is-not-specified-for-the-following-targe
     set(CMAKE_MACOSX_RPATH 0)
 endif()
+# 看看这个
+if (POLICY CMP0042)
+    # Newer cmake on MacOS should use @rpath
+    cmake_policy (SET CMP0042 NEW)
+endif ()
+
 if(WIN32)
  # no utf-8 warning in Visual Studio https://github.com/fooofei/cpp_notes/blob/master/visual_sutdio_warning_C4819_utf-8.md
  target_compile_options(${BINARY_NAME} PRIVATE /source-charset:utf-8 /execution-charset:utf-8)
