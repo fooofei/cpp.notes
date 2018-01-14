@@ -25,16 +25,23 @@ add_library(${BINARY_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
 
 
 ## platform
+### used before target at the begin of CMakeLists.txt file
 if(APPLE)
     # no warning
     # https://stackoverflow.com/questions/31561309/cmake-warnings-under-os-x-macosx-rpath-is-not-specified-for-the-following-targe
     set(CMAKE_MACOSX_RPATH 0)
 endif()
-# 看看这个
+# 看看这个 也会消除 warning
 if (POLICY CMP0042)
     # Newer cmake on MacOS should use @rpath
     cmake_policy (SET CMP0042 NEW)
 endif ()
+### the warning is:
+#CMake Warning (dev):
+#Policy CMP0042 is not set: MACOSX_RPATH is enabled by default.  Run "cmake
+#--help-policy CMP0042" for policy details.  Use the cmake_policy command to
+#set the policy and suppress this warning.
+
 
 if(WIN32)
  # no utf-8 warning in Visual Studio https://github.com/fooofei/cpp_notes/blob/master/visual_sutdio_warning_C4819_utf-8.md
