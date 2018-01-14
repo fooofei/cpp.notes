@@ -5,7 +5,9 @@ project(DEMO)
 
 
 
+
 !!! SAD. CMake document not say every command's minimun required version.
+
 
 
 
@@ -14,9 +16,11 @@ message(STATUS "message write here")
 
 
 
+
 ## next's command use after this
 add_executable(${BINARY_NAME} {CMAKE_CURRENT_SOURCE_DIR}/main.c)
 add_library(${BINARY_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
+
 
 
 
@@ -36,6 +40,7 @@ if(WIN32)
  # no utf-8 warning in Visual Studio https://github.com/fooofei/cpp_notes/blob/master/visual_sutdio_warning_C4819_utf-8.md
  target_compile_options(${BINARY_NAME} PRIVATE /source-charset:utf-8 /execution-charset:utf-8)
 endif()
+
 
 
 
@@ -66,6 +71,7 @@ set_target_properties(${TARGET2} PROPERTIES  CXX_STANDARD 11)
 
 
 
+
 ## Visual Studio special
 # add files to Visual Studio project files tree
 # if want to add .h files to visual studio, must add .h files to compile, such as
@@ -79,6 +85,7 @@ source_group(files FILES ${Source_files_files})
 
 
 
+
 ## add .h headers located directorys
 # not include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inlcude)
@@ -89,8 +96,10 @@ target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 
 
 
+
 ## add .cpp src files, target_sources is required 3.1 and above
 target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/u16string_bytes.cpp)
+
 
 
 
@@ -100,11 +109,13 @@ link_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 
 
+
 ## add source code compile defines
 if (WIN32)
     target_compile_definitions(${TARGET1} PRIVATE "UNICODE")
     target_compile_definitions(${TARGET1} PRIVATE "_UNICODE")
 endif ()
+
 
 
 
@@ -120,11 +131,11 @@ target_compile_options(${PROJECT_NAME} PRIVATE -fPIC)
 target_compile_options(${BINARY_NAME} PRIVATE -fno-common )
 endif()
 
-
 ## <SAFETY> no export functions on gcc
 if (NOT WIN32)
 target_compile_options(${PROJECT_NAME} PRIVATE -fvisibility=hidden)
 endif()
+
 
 
 
@@ -136,9 +147,11 @@ endif()
 
 
 
+
 ## link other librarys, same with -ldl -liconv
 target_link_libraries(${PROJECT_NAME} dl)
 target_link_libraries(${PROJECT_NAME} iconv)
+
 
 
 
@@ -151,11 +164,19 @@ target_link_libraries(${PROJECT_NAME} other_library)
 
 
 
+
+## add sub directory's CMakeLists.txt to project
+add_subdirectory(<submodulename>)
+
+
+
+
 ## copy generate binary file, at the time post build
 add_custom_command(
 TARGET ${PROJECT_NAME} POST_BUILD/PRE_BUILD
 COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:${PROJECT_NAME}> ../>
 )
+
 
 
 
@@ -169,6 +190,7 @@ if (NOT WIN32 AND CMAKE_BUILD_TYPE)
 
     endif ()
 endif ()
+
 
 
 
@@ -188,10 +210,12 @@ cmake -G "Visual Studio 15 2017" -T v141_xp  ..
 
 
 
+
 ## set the generate binary file extension /rename
 set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 # ref https://cmake.org/Wiki/CMake_Useful_Variables#System_.26_Compiler_Information
 # ref https://cmake.org/cmake/help/v3.0/manual/cmake-variables.7.html
+
 
 
 
@@ -200,6 +224,7 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 # same with https://github.com/toeb/moderncmake/blob/772c45522e4fcc48f3d6cfdc9386981dfb75a8dc/Modern%20CMake.pdf
 # https://stackoverflow.com/questions/26037954/cmake-target-link-libraries-interface-dependencies
 # https://cmake.org/pipermail/cmake/2016-May/063400.html
+
 
 
 
@@ -215,10 +240,12 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 
 
 
+
 ## builds
 # mkdir build
 # cd build
 # cmake -DCMAKE_BUILD_TYPE=Debug ..
+
 
 
 
@@ -229,15 +256,19 @@ set(CMAKE_SHARED_LIBRARY_SUFFIX ".pyd")
 
 
 
+
 ## build on Windows/x64
 cmake -G "Visual Studio 15 2017 Win64" ..
 cmake --build . --config Release
 cmake -G "Visual Studio 15 2017" -T v141_xp  ..
 
 
+
+
 ## current CMakeLists.txt directory
 # CMAKE_HOME_DIRECTORY not reliable, it can be other CMakeLists.txt directory
 add_library(${PROJECT_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+
 
 
 
@@ -248,6 +279,7 @@ function(print_all_variables)
         message(STATUS "${_variableName}=${${_variableName}}")
     endforeach()
 endfunction()
+
 
 
 
