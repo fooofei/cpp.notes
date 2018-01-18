@@ -126,6 +126,8 @@ if (WIN32)
     target_compile_definitions(${TARGET1} PRIVATE "UNICODE")
     target_compile_definitions(${TARGET1} PRIVATE "_UNICODE")
 endif ()
+target_compile_definitions(test_nmutex PRIVATE _GNU_SOURCE) will add `C_DEFINES = -D_GNU_SOURCE`
+target_compile_options(test_nmutex PRIVATE _GNU_SOURCE) will add `C_FLAGS = _GNU_SOURCE` THIS IS ERROR
 
 
 
