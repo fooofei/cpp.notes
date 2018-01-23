@@ -18,7 +18,7 @@ set(Source_files
 	)
 
 # more files, you can use if()
-list(APPED Source_files )
+list(APPEND Source_files )
 
 add_executable(${self_binary_name} ${Source_files})
 
