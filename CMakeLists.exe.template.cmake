@@ -12,7 +12,7 @@ endif()
 set(self_binary_name extern_test)
 
 set(Source_files 
-	${CMAKE_CURRENT_SOURCE_DcodeIR}/main.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/common.h
 	${CMAKE_CURRENT_SOURCE_DIR}/func.cpp
 	)
