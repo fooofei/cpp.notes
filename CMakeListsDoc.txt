@@ -296,6 +296,23 @@ endfunction()
 
 
 
+## variable scope
+when the set() meets add_subdirectory ()
+https://stackoverflow.com/questions/6891447/cmake-variable-scope-add-subdirectory
+set (SOURCEFILES main.cpp foo.cpp PARENT_SCOPE) at the subdirectory file,
+the variable will be see at parent directory file.
+
+SET(SOME_EXPAT_OPTION OFF CACHE BOOL "Use some expat option")
+https://stackoverflow.com/questions/14061605/override-option-in-cmake-subproject
+https://stackoverflow.com/questions/3766740/overriding-a-default-option-value-in-cmake-from-a-parent-cmakelists-txt
+
+option(LIB_OPTION1 "" OFF)
+option(LIB_OPTION2 "" ON)
+add_subdirectory(${CMAKE_SOURCE_DIRECTORY}/lib)
+
+
+
+
 ## helper macros
 macro(append_variable dest args)
     set(${dest} "${${dest}}${args}")
