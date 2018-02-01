@@ -30,7 +30,7 @@ target_include_directories(${self_library_name} INTERFACE|PUBLIC ${CMAKE_CURRENT
 ## defines options link-libraries
 target_compile_definitions(${self_library_name} PRIVATE "_USE_DATA2")
 if (WIN32)
-  # visual sutdio file encoding
+  # visual studio file encoding
   target_compile_options(${self_library_name} PRIVATE /source-charset:utf-8 /execution-charset:utf-8)
 #elseif(APPLE)
 else()
