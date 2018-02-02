@@ -310,6 +310,11 @@ option(LIB_OPTION1 "" OFF)
 option(LIB_OPTION2 "" ON)
 add_subdirectory(${CMAKE_SOURCE_DIRECTORY}/lib)
 
+overwrite the subdirectory's option
+one way is use cmake -DXXXX=ON/OFF ..
+one way is set(CURL_STATIC_CRT ON CACHE "" BOOL FORCE) at the parent CMakeLists.txt
+see https://github.com/edsiper/cmake-options
+
 
 
 
