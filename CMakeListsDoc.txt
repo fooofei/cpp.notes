@@ -79,6 +79,11 @@ set_target_properties(${TARGET2} PROPERTIES  CXX_STANDARD 11)
 
 # if call add_executable() first, then call set_property() to set c11, it's too late to make effect.
 
+# see support features
+foreach(i ${CMAKE_CXX_COMPILE_FEATURES})
+  message(STATUS "compiler support ${i}")
+endforeach()
+
 
 
 
