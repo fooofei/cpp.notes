@@ -18,36 +18,84 @@ message(STATUS "message write here")
 
 
 ## platform
-### used before target at the begin of CMakeLists.txt file
-if(APPLE)
-    # no warning
-    # https://stackoverflow.com/questions/31561309/cmake-warnings-under-os-x-macosx-rpath-is-not-specified-for-the-following-targe
-    set(CMAKE_MACOSX_RPATH 0)
-endif()
-# 看看这个 也会消除 warning
-if (POLICY CMP0042)
-    # Newer cmake on MacOS should use @rpath
-    cmake_policy (SET CMP0042 NEW)
-endif ()
-### the warning is:
-#CMake Warning (dev):
-#Policy CMP0042 is not set: MACOSX_RPATH is enabled by default.  Run "cmake
-#--help-policy CMP0042" for policy details.  Use the cmake_policy command to
-#set the policy and suppress this warning.
+### apple's warning
+     the warning is:
+    CMake Warning (dev):
+    Policy CMP0042 is not set: MACOSX_RPATH is enabled by default.  Run "cmake
+    --help-policy CMP0042" for policy details.  Use the cmake_policy command to
+    set the policy and suppress this warning.
+    #### used before target at the begin of CMakeLists.txt file
+    https://stackoverflow.com/questions/31561309/cmake-warnings-under-os-x-macosx-rpath-is-not-specified-for-the-following-targe
+    if(APPLE)   
+        set(CMAKE_MACOSX_RPATH 0)
+    endif()
+    #### this also works
+    if (POLICY CMP0042)
+        # Newer cmake on MacOS should use @rpath
+        cmake_policy (SET CMP0042 NEW)
+    endif ()
+### MSVC's file encoding warning
+    https://github.com/fooofei/cpp_notes/blob/master/visual_sutdio_warning_C4819_utf-8.md
+    if(WIN32)
+        target_compile_options(${BINARY_NAME} PRIVATE /source-charset:utf-8 /execution-charset:utf-8)
+    endif()
+### MSVC's source file tree
+    # add files to Visual Studio project files tree
+    # if want to add .h files to visual studio, must add .h files to compile, such as
+    # set(Source_files_files )
+    # add_library(${PROJECT_NAME} STATIC ${Source_files_files})
+    # or
+    # target_sources(${PROJECT_NAME} PRIVATE ${Source_files_files})
+    # if not use above, only use source_group(), will not show .h files
+    # first arg `files` is the name in Visual Studio
+    source_group(files FILES ${Source_files_files})
+### MSVC's .pdb file
+    # target_compile_options(${TARGET1} PRIVATE /Zi) is not work
+    if(MSVC)
+        set_property(TARGET ${TARGET1}  APPEND PROPERTY LINK_FLAGS /DEBUG:FULL)
+    endif()
+### msvc static link runtime
+    build static link runtime library, so the generate executable file can run
+    on other machine, not occur runtime error
+    How can I build my MSVC application with a static runtime?
+    ## when use this static link runtime, the sub modules also use static link,
+    ## we donnot need to set every sub module to static link
+    https://cmake.org/Wiki/CMake_FAQ#How_can_I_build_my_MSVC_application_with_a_static_runtime.3F
+    test it works
+    or install "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community
+    \VC\Redist\MSVC\14.11.25325\vcredist_x86.exe"
+    -------------
+    1 put this in a file named cxx_flag_overrides.cmake
+    if(MSVC)
+        set(CMAKE_CXX_FLAGS_DEBUG_INIT "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1")
+        set(CMAKE_CXX_FLAGS_MINSIZEREL_INIT     "/MT /O1 /Ob1 /D NDEBUG")
+        set(CMAKE_CXX_FLAGS_RELEASE_INIT        "/MT /O2 /Ob2 /D NDEBUG")
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT "/MT /Zi /O2 /Ob1 /D NDEBUG")
+    endif()
+
+    2 put this in a file named c_flag_overrides.cmake
+    if(MSVC)
+        set(CMAKE_C_FLAGS_DEBUG_INIT "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1")
+        set(CMAKE_C_FLAGS_MINSIZEREL_INIT     "/MT /O1 /Ob1 /D NDEBUG")
+        set(CMAKE_C_FLAGS_RELEASE_INIT        "/MT /O2 /Ob2 /D NDEBUG")
+        set(CMAKE_C_FLAGS_RELWITHDEBINFO_INIT "/MT /Zi /O2 /Ob1 /D NDEBUG")
+    endif()
+
+    3 put this in CMakeLists.txt file beginning
+    set(CMAKE_USER_MAKE_RULES_OVERRIDE
+            ${CMAKE_CURRENT_SOURCE_DIR}/c_flag_overrides.cmake)
+    set(CMAKE_USER_MAKE_RULES_OVERRIDE_CXX
+            ${CMAKE_CURRENT_SOURCE_DIR}/cxx_flag_overrides.cmake)
+    ---------------
+    also when need to build run on Windows XP, need pass options to cmake:
+    cmake -G "Visual Studio 15 2017" -T v141_xp  ..
 
 
-if(WIN32)
- # no utf-8 warning in Visual Studio https://github.com/fooofei/cpp_notes/blob/master/visual_sutdio_warning_C4819_utf-8.md
- target_compile_options(${BINARY_NAME} PRIVATE /source-charset:utf-8 /execution-charset:utf-8)
-endif()
 
 
-
-
-## next's command use after this
+## define a target
 add_executable(${BINARY_NAME} {CMAKE_CURRENT_SOURCE_DIR}/main.c)
 add_library(${BINARY_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
-
 
 
 
@@ -87,21 +135,7 @@ endforeach()
 
 
 
-## Visual Studio special
-# add files to Visual Studio project files tree
-# if want to add .h files to visual studio, must add .h files to compile, such as
-# set(Source_files_files )
-# add_library(${PROJECT_NAME} STATIC ${Source_files_files})
-# or
-# target_sources(${PROJECT_NAME} PRIVATE ${Source_files_files})
-# if not use above, only use source_group(), will not show .h files
-# first arg `files` is the name in Visual Studio
-source_group(files FILES ${Source_files_files})
-
-
-
-
-## add .h headers located directorys
+## includes headers: add .h headers located directorys
 # not include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inlcude)
 #
@@ -112,21 +146,32 @@ target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 
 
 
-## add .cpp src files, target_sources is required 3.1 and above
+## append more source files: add .cpp src files
+# target_sources() is required 3.1 and above
 target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/u16string_bytes.cpp)
 # use  list (APPEND NN_SOURCES ...) to append source files which string(CONCAT ...) will fail
 
 
 
 
-## add libs located directorys,
+## link libs: add libs located directorys,
 # besides you must use target_link_libraries() to specific lib
 link_directories(${CMAKE_CURRENT_SOURCE_DIR})
+# link other librarys, same with -ldl -liconv
+target_link_libraries(${PROJECT_NAME} dl)
+target_link_libraries(${PROJECT_NAME} iconv)
+
+# add other library for static link
+# first add_subdirectory(), then target_link_libraries()
+if (NOT TARGET other_library)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../  build_other_library)
+endif ()
+target_link_libraries(${PROJECT_NAME} other_library)
 
 
 
 
-## add source code compile defines
+## define macros
 if (WIN32)
     target_compile_definitions(${TARGET1} PRIVATE "UNICODE")
     target_compile_definitions(${TARGET1} PRIVATE "_UNICODE")
@@ -145,40 +190,9 @@ target_compile_options(test_nmutex PRIVATE _GNU_SOURCE) will add `C_FLAGS = _GNU
 # not use add_compile_options()
 if (NOT WIN32)
 target_compile_options(${PROJECT_NAME} PRIVATE -fPIC)
-# for multi define global variables
-target_compile_options(${BINARY_NAME} PRIVATE -fno-common )
+target_compile_options(${BINARY_NAME} PRIVATE -fno-common ) # for multi define global variables
+target_compile_options(${PROJECT_NAME} PRIVATE -fvisibility=hidden) #no export functions on gcc
 endif()
-
-## <SAFETY> no export functions on gcc
-if (NOT WIN32)
-target_compile_options(${PROJECT_NAME} PRIVATE -fvisibility=hidden)
-endif()
-
-
-
-
-## generate .pdb files when build with MSVC
-# target_compile_options(${TARGET1} PRIVATE /Zi) is not work
-if(MSVC)
-    set_property(TARGET ${TARGET1}  APPEND PROPERTY LINK_FLAGS /DEBUG:FULL)
-endif()
-
-
-
-
-## link other librarys, same with -ldl -liconv
-target_link_libraries(${PROJECT_NAME} dl)
-target_link_libraries(${PROJECT_NAME} iconv)
-
-
-
-
-## add other library for static link
-# first add_subdirectory(), then target_link_libraries()
-if (NOT TARGET other_library)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../  build_other_library)
-endif ()
-target_link_libraries(${PROJECT_NAME} other_library)
 
 
 
@@ -212,19 +226,6 @@ endif ()
 
 
 
-## msvc static link runtime
-build static link runtime library, so the generate executable file can run
-on other machine, not occur runtime error
-How can I build my MSVC application with a static runtime?
-## when use this static link runtime, the sub modules also use static link,
-## we donnot need to set every sub module to static link
-https://cmake.org/Wiki/CMake_FAQ#How_can_I_build_my_MSVC_application_with_a_static_runtime.3F
-test it works
-or install "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community
-\VC\Redist\MSVC\14.11.25325\vcredist_x86.exe"
-
-also when need to build run on Windows XP, need pass options to cmake:
-cmake -G "Visual Studio 15 2017" -T v141_xp  ..
 
 
 
@@ -362,9 +363,7 @@ endmacro()
 ## install CMake
 
 one way to compile & install CMake is 
-
 download from https://cmake.org/files/v3.10/cmake-3.10.1.tar.gz
-
 ```shell
 tar xvf ./cmake-3.10.1.tar.gz
 cd cmake-3.10.1
