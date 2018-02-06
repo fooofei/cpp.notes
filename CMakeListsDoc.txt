@@ -288,6 +288,16 @@ cmake -G "Visual Studio 15 2017" -T v141_xp  ..
 # CMAKE_HOME_DIRECTORY not reliable, it can be other CMakeLists.txt directory
 add_library(${PROJECT_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
+the file structure is 
+├── ./libnanomsg_static.cmake
+│   ├── ./nanomsg/CMakeLists.txt
+│   │   ├── ./nanomsg/src/CMakeLists.txt
+│   ├── ./test_pair/CMakeLists.txt
+
+the /test_pair/CMakeLists.txt include the libnanomsg_static.cmake use include(libnanomsg_static),
+if run cmake in test_pair directory, the ${CMAKE_CURRENT_SOURCE_DIR} is D:/source/GitHub/c_nanomsg_demo/test_pair
+so, the CMAKE_CURRENT_SOURCE_DIR is also not reliable, recommand use CMAKE_CURRENT_LIST_DIR
+
 
 
 
