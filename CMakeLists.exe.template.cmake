@@ -12,9 +12,9 @@ endif()
 set(self_binary_name extern_test)
 
 set(Source_files 
-	${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/common.h
-	${CMAKE_CURRENT_SOURCE_DIR}/func.cpp
+	${CMAKE_CURRENT_LIST_DIR}/main.cpp
+	${CMAKE_CURRENT_LIST_DIR}/common.h
+	${CMAKE_CURRENT_LIST_DIR}/func.cpp
 	)
 
 # more files, you can use if()
@@ -23,7 +23,7 @@ list(APPEND Source_files )
 add_executable(${self_binary_name} ${Source_files})
 
 # include other directories
-target_include_directories(${self_binary_name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${self_binary_name} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
 ## defines options link-libraries
 target_compile_definitions(${self_binary_name} PRIVATE "_USE_DATA2")
@@ -45,14 +45,14 @@ endif()
 
 # link other libraries
 if (NOT TARGET lib1)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../  build_lib1)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../  build_lib1)
 endif ()
 target_link_libraries(${self_binary_name} lib1)
 
 
 add_custom_command(
         TARGET ${self_binary_name} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:${self_binary_name}> ${CMAKE_CURRENT_SOURCE_DIR}/$<TARGET_FILE_NAME:${self_binary_name}>
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:${self_binary_name}> ${CMAKE_CURRENT_LIST_DIR}/$<TARGET_FILE_NAME:${self_binary_name}>
 )
 
 # visual studio project tree

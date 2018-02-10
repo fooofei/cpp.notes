@@ -12,9 +12,9 @@ endif()
 set(self_library_name extern_test)
 
 set(Source_files 
-	${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/common.h
-	${CMAKE_CURRENT_SOURCE_DIR}/func.cpp
+	${CMAKE_CURRENT_LIST_DIR}/main.cpp
+	${CMAKE_CURRENT_LIST_DIR}/common.h
+	${CMAKE_CURRENT_LIST_DIR}/func.cpp
 
 	)
 list(APPEND Source_files ...)
@@ -22,10 +22,10 @@ list(APPEND Source_files ...)
 add_library(${self_library_name} STATIC|SHARED  ${Source_files})
 
 # include other directories
-target_include_directories(${self_library_name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${self_library_name} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
 # for others module include
-target_include_directories(${self_library_name} INTERFACE|PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${self_library_name} INTERFACE|PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 
 ## defines options link-libraries
 target_compile_definitions(${self_library_name} PRIVATE "_USE_DATA2")
@@ -46,7 +46,7 @@ endif()
 
 # link other libraries
 if (NOT TARGET lib1)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../  build_lib1)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../  build_lib1)
 endif ()
 target_link_libraries(${self_library_name} lib1)
 

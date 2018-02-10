@@ -83,9 +83,9 @@ message(STATUS "message write here")
 
     3 put this in CMakeLists.txt file beginning
     set(CMAKE_USER_MAKE_RULES_OVERRIDE
-            ${CMAKE_CURRENT_SOURCE_DIR}/c_flag_overrides.cmake)
+            ${CMAKE_CURRENT_LIST_DIR}/c_flag_overrides.cmake)
     set(CMAKE_USER_MAKE_RULES_OVERRIDE_CXX
-            ${CMAKE_CURRENT_SOURCE_DIR}/cxx_flag_overrides.cmake)
+            ${CMAKE_CURRENT_LIST_DIR}/cxx_flag_overrides.cmake)
     ---------------
     also when need to build run on Windows XP, need pass options to cmake:
     cmake -G "Visual Studio 15 2017" -T v141_xp  ..
@@ -94,8 +94,8 @@ message(STATUS "message write here")
 
 
 ## define a target
-add_executable(${BINARY_NAME} {CMAKE_CURRENT_SOURCE_DIR}/main.c)
-add_library(${BINARY_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
+add_executable(${BINARY_NAME} {CMAKE_CURRENT_LIST_DIR}/main.c)
+add_library(${BINARY_NAME} STATIC ${CMAKE_CURRENT_LIST_DIR}/main.c)
 
 
 
@@ -136,19 +136,19 @@ endforeach()
 
 
 ## includes headers: add .h headers located directorys
-# not include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inlcude)
+# not include_directories(${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/inlcude)
 #
 # if the target is a static linked library, and want other library who linked the library
 # to use the library direct by the header, not by relative header path,then write this:
-target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/inlcude)
+target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_LIST_DIR}/inlcude)
 
 
 
 
 ## append more source files: add .cpp src files
 # target_sources() is required 3.1 and above
-target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/u16string_bytes.cpp)
+target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/u16string_bytes.cpp)
 # use  list (APPEND NN_SOURCES ...) to append source files which string(CONCAT ...) will fail
 
 
@@ -156,7 +156,7 @@ target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/u16string
 
 ## link libs: add libs located directorys,
 # besides you must use target_link_libraries() to specific lib
-link_directories(${CMAKE_CURRENT_SOURCE_DIR})
+link_directories(${CMAKE_CURRENT_LIST_DIR})
 # link other librarys, same with -ldl -liconv
 target_link_libraries(${PROJECT_NAME} dl)
 target_link_libraries(${PROJECT_NAME} iconv)
@@ -164,7 +164,7 @@ target_link_libraries(${PROJECT_NAME} iconv)
 # add other library for static link
 # first add_subdirectory(), then target_link_libraries()
 if (NOT TARGET other_library)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../  build_other_library)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../  build_other_library)
 endif ()
 target_link_libraries(${PROJECT_NAME} other_library)
 
@@ -286,7 +286,7 @@ cmake -G "Visual Studio 15 2017" -T v141_xp  ..
 
 ## current CMakeLists.txt directory
 # CMAKE_HOME_DIRECTORY not reliable, it can be other CMakeLists.txt directory
-add_library(${PROJECT_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+add_library(${PROJECT_NAME} STATIC ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 
 the file structure is 
 ├── ./libnanomsg_static.cmake
