@@ -381,4 +381,4 @@ cd cmake-3.10.1
 make -j8
 ```
 
-or district download binary from https://cmake.org/files/v3.10/cmake-3.10.1-Linux-x86_64.tar.gz
+or direct download binary from https://cmake.org/files/v3.10/cmake-3.10.1-Linux-x86_64.tar.gz
