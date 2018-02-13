@@ -1,4 +1,4 @@
-# please donnot use .md extension on this file, CMakeLists is .txt extension.
+# Please don't use .md extension on this file, CMakeLists is .txt extension.
 # cmake_minimum_required(VERSION 2.8.12)
 cmake_minimum_required(VERSION 3.1)
 project(DEMO)
@@ -6,7 +6,7 @@ project(DEMO)
 
 
 
-!!! SAD. CMake document not say every command's minimun required version.
+!!! SAD. CMake document not say every command's minimum required version.
 
 
 
@@ -17,7 +17,7 @@ message(STATUS "message write here")
 
 
 
-## platform
+## Platform
 ### apple's warning
      the warning is:
     CMake Warning (dev):
@@ -31,7 +31,7 @@ message(STATUS "message write here")
     endif()
     #### this also works
     if (POLICY CMP0042)
-        # Newer cmake on MacOS should use @rpath
+        # Newer CMake on MacOS should use @rpath
         cmake_policy (SET CMP0042 NEW)
     endif ()
 ### MSVC's file encoding warning
@@ -199,6 +199,10 @@ endif()
 
 ## add sub directory's CMakeLists.txt to project
 add_subdirectory(<submodulename>)
+Still not know the difference of include and add_subdirectory.
+Useful links 
+[cmake: add_subdirectory() vs include()]https://stackoverflow.com/questions/48509911/cmake-add-subdirectory-vs-include?noredirect=1&lq=1
+[Difference between ADD_SUBDIRECTORY and INCLUDE]https://cmake.org/pipermail/cmake/2007-November/017897.html
 
 
 
@@ -222,10 +226,6 @@ if (NOT WIN32 AND CMAKE_BUILD_TYPE)
 
     endif ()
 endif ()
-
-
-
-
 
 
 
@@ -370,10 +370,11 @@ macro(append_cxxflags_release args)
 endmacro()
 
 
-## install CMake
 
-one way to compile & install CMake is 
-download from https://cmake.org/files/v3.10/cmake-3.10.1.tar.gz
+
+## install CMake
+One way to compile & install CMake is  download from 
+https://cmake.org/files/v3.10/cmake-3.10.1.tar.gz
 ```shell
 tar xvf ./cmake-3.10.1.tar.gz
 cd cmake-3.10.1
