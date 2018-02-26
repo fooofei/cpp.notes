@@ -1,18 +1,5 @@
 ﻿
 
-
-### MapReduce
-
-- in python streaming, sys.stdin must run out, 
-```python
-for line in sys.stdin:
-    continue
-```
-must run to end, cannot break at middle.
-
-- mapreduce must print something, if not, will error occured, report io closed.
-
-
 ### Hbase shell
 
 - hbase scan, only show row key.
