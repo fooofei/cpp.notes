@@ -1,16 +1,25 @@
 ﻿
+### 一些链接
+
 https://github.com/google/sanitizers
 
 https://github.com/google/sanitizers/wiki/AddressSanitizer
 
-* 支持版本  Clang (3.3+) and GCC (4.8+). 还是 gcc6 更好，建议升级到最新版本。
+### 支持哪些编译器
 
-* 模式 1、你的程序仅仅是一个二进制（可执行程序），比如最简单的 `g++ 1.c` ,
+支持版本  Clang (3.3+) and GCC (4.8+). 还是 gcc6 更好，建议升级到最新版本。
+
+### 单二进制
+
+你的程序仅仅是一个二进制（可执行程序），比如最简单的 `g++ 1.c` ,
 ~~~
 那么就在编译的时候加 `-fsanitize=address`, 最终为 `g++ -fsanitize=address  1.c`.
 ~~~
 
-* 模式 2、程序运行模式是 二进制（可执行程序）+动态库 .so ，我们想要分析动态库 so 文件。
+
+### 二进制 + 动态库(.so)
+
+程序运行模式是 二进制（可执行程序）+动态库 .so ，我们想要分析动态库 so 文件。
 ~~~
 那么 
 
@@ -40,7 +49,8 @@ https://github.com/google/sanitizers/wiki/AddressSanitizer
 	
     `ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.8 ASAN_OPTIONS=symbolize=1`
 ~~~
-* 缺陷
+
+### 缺陷
 ~~~c++
 无法检测栈空间越界
 
