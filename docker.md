@@ -4,7 +4,7 @@ http://www.imooc.com/article/16906
 
 
 ### docker image 关系
-
+---
 
 ![image](https://i.stack.imgur.com/vGuay.png)
 
@@ -12,7 +12,7 @@ http://www.imooc.com/article/16906
 from https://stackoverflow.com/questions/21498832/in-docker-whats-the-difference-between-a-container-and-an-image
 
 ### entrypoint
-
+---
 20180316
 
 今天尝试了 
@@ -49,6 +49,7 @@ ADD xxx.tar.xz /
 ```
 
 ### docker rm
+---
 在 docker rmi 镜像之前，必须关闭移除所有这个镜像的 container
 
 不管哪个镜像 全部都移除 container
@@ -59,7 +60,7 @@ $ docker rm $(docker ps -a -q)
 
 
 ### Host 与 Container 文件互通
-
+---
 把 Host 的文件做映射
 
 ```shell
@@ -70,7 +71,7 @@ $ docker run -v /:/docker_host  -it <id> bash
 
 
 ### docker pull connection reset
-
+---
 ```shell
 $ docker pull ubuntu:16.04
 Trying to pull repository docker.io/library/ubuntu ... 
@@ -82,7 +83,7 @@ dig auth.docker.io
 34.193.147.40 registry-1.docker.io auth.docker.io
 
 ### 镜像加速
-
+---
 https://c.163.com/wiki/index.php?title=DockerHub%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F
 sudo echo "DOCKER_OPTS=\"\$DOCKER_OPTS --registry-mirror=http://hub-mirror.c.163.com\"" >> /etc/default/docker
 另一个 DOCKER_OPTS="--registry-mirror=https://docker.mirrors.ustc.edu.cn"
