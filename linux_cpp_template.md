@@ -1,1 +1,0 @@
-﻿嵌套模板使用，要带空格，如 `std::vector<util::auto_ptr<char> > s;`  ，不带空格，CentOS编译就会失败
