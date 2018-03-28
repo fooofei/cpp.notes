@@ -66,7 +66,8 @@ $ docker rm $(docker ps -a -q)
 ```shell
 $ docker run -v /:/docker_host  -it <id> bash
 ```
-1、2个文件使用 docker cp 这种慢的方式
+1、2个文件使用 docker cp 这种慢的方式 $ docker cp /bin/gdb sensor:/bin/
+ 暂时还不知道 带不带尾部的 / 有什么区别
 
 
 

@@ -34,6 +34,7 @@
 
   复制上述输出
   on B:
+  cd ~/.ssh
   # vim authorized_keys
   粘贴 保存即可
   ```
