@@ -135,7 +135,7 @@ endforeach()
 
 
 
-## includes headers: add .h headers located directorys
+## includes headers: add .h headers located directorys (-I)
 # not include_directories(${CMAKE_CURRENT_LIST_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/inlcude)
 #
@@ -155,13 +155,19 @@ target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/src/u16string_b
 
 
 ## link libs: add libs located directorys,
-# besides you must use target_link_libraries() to specific lib
-link_directories(${CMAKE_CURRENT_LIST_DIR})
+### include public librarys
 # link other librarys, same with -ldl -liconv
 target_link_libraries(${PROJECT_NAME} dl)
 target_link_libraries(${PROJECT_NAME} iconv)
 
-# add other library for static link
+### include custom librarys
+link_directories(${CMAKE_CURRENT_LIST_DIR})  # 没有效果是为啥呢 预期应该给 link 增加 -L参数
+link_directories 必须放在 add_executable 前面才会生效
+https://cmake.org/cmake/help/v3.0/command/link_directories.html
+"The command will apply only to targets created after it is called."
+target_link_libraries(${PROJECT_NAME} customlibname)
+
+### add a CMake static link library 
 # first add_subdirectory(), then target_link_libraries()
 if (NOT TARGET other_library)
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../  build_other_library)
@@ -177,7 +183,7 @@ if (WIN32)
     target_compile_definitions(${TARGET1} PRIVATE "_UNICODE")
 endif ()
 target_compile_definitions(test_nmutex PRIVATE _GNU_SOURCE) will add `C_DEFINES = -D_GNU_SOURCE`
-target_compile_options(test_nmutex PRIVATE _GNU_SOURCE) will add `C_FLAGS = _GNU_SOURCE` THIS IS ERROR
+target_compile_options(test_nmutex PRIVATE _GNU_SOURCE) will add `C_FLAGS = _GNU_SOURCE`
 
 
 
