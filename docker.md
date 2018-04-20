@@ -48,6 +48,10 @@ FROM scratch
 ADD xxx.tar.xz /
 ```
 
+从 macOS export 的包，到 linux 使用 ，import 没问题，但是运行 container 出错
+[root@localhost testing]# docker run -it --name=temp centos:python bash
+docker: Error response from daemon: oci runtime error: container_linux.go:265: starting container process caused "exec: \"bash\": executable file not found in $PATH".
+
 ### docker rm
 ---
 在 docker rmi 镜像之前，必须关闭移除所有这个镜像的 container
