@@ -131,3 +131,10 @@
   tortoise git
     缺点 无法显示本地仓库是否落下了远程仓库 远程仓库是否是比本地新
     优点 性能好
+  ### Git remove tag
+  tag 已经打好，但是发现其他人有代码没提交成功，我要删除 tag ，然后等别人提交成功，再继续打 tag。
+  
+  # 先删除 remote
+  # git push --delete origin v1.1.4
+  # 再删除本地
+  # git tag --delete  v1.1.4
