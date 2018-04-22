@@ -134,7 +134,19 @@
   ### Git remove tag
   tag 已经打好，但是发现其他人有代码没提交成功，我要删除 tag ，然后等别人提交成功，再继续打 tag。
   
-  # 先删除 remote
-  # git push --delete origin v1.1.4
-  # 再删除本地
-  # git tag --delete  v1.1.4
+   先删除 remote
+   
+  `# git push --delete origin v1.1.4`
+   再删除本地
+   
+  `# git tag --delete  v1.1.4`
+  
+  ### Git 不能添加空目录，有一个技巧是在这个目录下添加一个文件  .gitignore
+  写上
+  ```
+  # Ignore everything in this directory
+  *
+  # Except this file
+  !.gitignore
+  ```
+  ref https://stackoverflow.com/questions/115983/how-can-i-add-an-empty-directory-to-a-git-repository
