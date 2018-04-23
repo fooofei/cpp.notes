@@ -52,6 +52,21 @@ ADD xxx.tar.xz /
 [root@localhost testing]# docker run -it --name=temp centos:python bash
 docker: Error response from daemon: oci runtime error: container_linux.go:265: starting container process caused "exec: \"bash\": executable file not found in $PATH".
 
+[root@localhost testing]# docker run -it --name=temp centos:python sh
+docker: Error response from daemon: oci runtime error: container_linux.go:265: starting container process caused "exec: \"sh\": executable file not found in $PATH".
+
+export import 使用还是有局限
+
+docker save on macOS, docker load on linux, error :
+on macOS:
+$ docker save centos:7_make_gcc_gdb_python > centos_p.tar
+
+[root@localhost testing]# docker load < centos_p.tar.gz 
+open /var/lib/docker/tmp/docker-import-308524309/repositories: no such file or directory
+非 gz 文件也不行
+[root@localhost testing]# docker load < centos_p.tar 
+open /var/lib/docker/tmp/docker-import-918895631/repositories: no such file or directory
+
 ### docker rm
 ---
 在 docker rmi 镜像之前，必须关闭移除所有这个镜像的 container
