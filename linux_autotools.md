@@ -9,6 +9,7 @@ autoconf
 
 automake
 
+sh ./configure
 
 
 # ignore deps 
