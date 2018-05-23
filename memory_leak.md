@@ -54,3 +54,8 @@ C 代码例子和运行要点见 http://man7.org/linux/man-pages/man3/mtrace.3.h
 它是一个文件，因为进程可能是服务端程序，无法确定 exit 时间，所以自己判断时机合适就可以了，然后使用 mtrace 命令把刚才的文件作为输入，
 
 它会扫描一遍这个文件，找出那些地址的内存还没得到释放，并且给出该内存申请的代码文件和行号。
+
+
+还尝试了 strace-plus https://github.com/pgbovine/strace-plus 不会用，它说它的功能已经放到了 strace 里，
+
+Version>4.9 上，选项为 -k 我用了这个版本，但是没有 -k 选项。只能放弃了。
