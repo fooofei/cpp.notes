@@ -59,3 +59,27 @@ C 代码例子和运行要点见 http://man7.org/linux/man-pages/man3/mtrace.3.h
 还尝试了 strace-plus https://github.com/pgbovine/strace-plus 不会用，它说它的功能已经放到了 strace 里，
 
 Version>4.9 上，选项为 -k 我用了这个版本，但是没有 -k 选项。只能放弃了。
+
+
+## Linux 查看内存方法
+
+`# cat /proc/<pid>/status `
+
+RSS/VmRSS - Resident Set Size 实际使用物理内存（包含共享库占用的内存）
+
+PSS - Proportional Set Size 实际使用的物理内存（比例分配共享库占用的内存）
+
+USS - Unique Set Size 进程独自占用的物理内存（不包含共享库占用的内存）
+
+VmHWM:    表示进程所占用物理内存的峰值
+VmData 是数据占用内存
+
+调试跟踪发现: 1 malloc 内存，未使用，大小增长到 VmData , VmRSS 保持不变
+
+2 memset(ptr, 1, size) 之后接着就增长到 VmRSS 上， ptr[0]=0; 不会增长到 VmRSS 上。
+memset(ptr, 0, size) 会增长到 VmRSS 上。
+增长到 VmRSS 上后， VmHWM 也会增长，就是说峰值变了。
+
+3 calloc(1, size) 不会增长到 VmRSS 上，这很意外，理论上， malloc + memset = calloc
+
+但是 VmRSS 上的表现不这么说。
