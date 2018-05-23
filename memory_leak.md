@@ -49,3 +49,8 @@ addr2line 解决这个问题，比如这里 https://stackoverflow.com/questions/
 
 C 代码例子和运行要点见 http://man7.org/linux/man-pages/man3/mtrace.3.html
 
+运行进程前要设置 MALLOC_TRACE 环境变量，接下来是运行进程，运行过程中的  malloc alloc free 都会记入 MALLOC_TRACE 变量中的值中，
+
+它是一个文件，因为进程可能是服务端程序，无法确定 exit 时间，所以自己判断时机合适就可以了，然后使用 mtrace 命令把刚才的文件作为输入，
+
+它会扫描一遍这个文件，找出那些地址的内存还没得到释放，并且给出该内存申请的代码文件和行号。
