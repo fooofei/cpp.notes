@@ -44,6 +44,10 @@ https://segmentfault.com/a/1190000011844958
 原来是要在资源管理器中右键手动下载的，不是配置好 sftp.json文件后自动的.
 
 
+## Visual Studio Code + Remote Workspace
+
+
+
 ### linux 开启 samba  Windows 来登陆
 
 Visual Studio 对磁盘读写多，我这里没满足要求，使用起来很卡顿。
