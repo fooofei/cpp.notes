@@ -46,7 +46,9 @@ https://segmentfault.com/a/1190000011844958
 
 ## Visual Studio Code + Remote Workspace
 
+这个挺好用 
 
+不是把文件复制一份到本地 是直接编辑远程的文件
 
 ### linux 开启 samba  Windows 来登陆
 
