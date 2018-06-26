@@ -109,3 +109,7 @@ sudo echo "DOCKER_OPTS=\"\$DOCKER_OPTS --registry-mirror=http://hub-mirror.c.163
 另一个 DOCKER_OPTS="--registry-mirror=https://docker.mirrors.ustc.edu.cn"
 service docker restart
 
+
+### 容器磁盘占用空间
+
+`docker ps -a`

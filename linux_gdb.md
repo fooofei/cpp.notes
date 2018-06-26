@@ -54,3 +54,8 @@ x 查看内存
 ### LLDB GDB map
 
 [lldb <-> gdb map](https://lldb.llvm.org/lldb-gdb.html)
+
+
+### Breakpoint on pthread create
+
+` b __pthread_create_2_1`
