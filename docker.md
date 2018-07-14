@@ -2,6 +2,34 @@
 ---
 http://www.imooc.com/article/16906
 
+suse 的 docker 叫 suse/sles11sp3:latest   https://github.com/SUSE/sle2docker
+
+### docker proxy
+
+修改 `/lib/systemd/system/docker.service`
+
+`[service]` 下
+`EnvironmentFile=-/etc/sysconfig/docker`
+
+创建或修改 `/etc/sysconfig/docker`
+
+`HTTP_PROXY=http://localhost:3128/`
+`HTTPS_PROXY=http://localhost:3128/`
+`NO_PROXY=localhost,127.0.0.1,internal-docker-registry.somecorporation.com`
+`export HTTP_PROXY HTTPS_PROXY NO_PROXY`
+ 
+刷新配置,使代理生效
+`systemctl daemon-reload`   # 这一步必须
+
+`systemctl restart docker`
+ 
+
+### docker start
+
+如何在 docker restart 前在 host 上固定执行几个命令？
+
+如何在 dockerfile 里 mount ？
+
 
 ### docker image 关系
 ---
