@@ -149,3 +149,59 @@ x[4]=9;
 
 以上代码  gcc-5(5.4)检测不到, gcc-6 可以检测到。
 ~~~
+
+### /usr/bin/ld: cannot find /usr/lib64/libasan.so.0.0.0
+
+使用的是 GCC 4.8.5，去 /usr/lib64/libasan.so.0.0.0 找这个文件，的确不存在，但是存在 /usr/lib/libasan.so.0.0.0 。
+
+用 file 查看，也是 32 bit ELF文件， yum search all asan 只见到了 libasan.i686 : The Address Sanitizer runtime library
+
+预期我们使用的应该是 libasan.x86_64 。所以还是不能用。 
+
+
+## valgrind 
+
+valgrind --trace-children=yes --leak-check=full --log-file=$PWD/valgrind.log --tool=memcheck --verbose
+
+```c
+
+/* The file is to test valgrind, the parent process has memory leak, 
+
+ and the forked child process also have memory leak. 
+
+To compile it gcc -g valgrind_test.c -o valgrind_test
+
+
+==93002== 4 bytes in 1 blocks are definitely lost in loss record 1 of 2
+==93002==    at 0x4C29BBD: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93002==    by 0x4005A9: main (valgrind_test.c:31)
+==93002== 
+==93002== 8 bytes in 1 blocks are definitely lost in loss record 2 of 2
+==93002==    at 0x4C29BBD: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93002==    by 0x400591: run_in_fork_child (valgrind_test.c:25)
+==93002==    by 0x4005C2: main (valgrind_test.c:35)
+==92524== 
+ 
+ */
+#include <stdio.h>
+#include <stdlib.h>
+
+void run_in_fork_child()
+{
+    int * b = malloc(8);
+    (void)b;
+}
+
+int main()
+{
+    int * a = malloc(4);
+    (void)a;
+    switch(fork())
+    {
+        case 0: run_in_fork_child(); break;
+        default: break;
+    }
+    
+    return 0;
+}
+```

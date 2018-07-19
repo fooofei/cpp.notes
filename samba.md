@@ -138,13 +138,28 @@
 
 ## Samba 登录失败 
 
-- linux 防火墙
+- CentOS-linux 防火墙
 
 `# systemctl stop iptables`
 `# systemctl stop firewalld`
 
 - Windows 用户密码都正确，错误提示‘未知的用户名和密码。’
   regedit 打开注册表，删除键值 HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa 中的 LMCompatibilityLevel，无需重启计算机
+
+- Ubuntu smbclient 本机测试成功 Windows 链接提示拒绝访问
+
+提示图 http://www.linuxdiyf.com/linux/28654.html
+
+去翻 log , 在目录 /var/log/samba ，log.主机名 (不是 log.IP名) 查看日志有 
+```
+[2018/07/19 00:14:33.667605,  0] ../source3/lib/util.c:789(smb_panic_s3)
+  PANIC (pid 46608): Bad talloc magic value - access after free
+```
+去安装 apt-get install libtalloc2
+
+参考 http://blog.51cto.com/kmt1994/1841489
+
+这个跟防火墙无关 (Ubuntu 防火墙是 ufw，ufw enable 之后也能链接成功)
 
 ## Samba 资料
 
