@@ -136,7 +136,7 @@
   弹出用户名密码对话框 -> 登录成功
 
 
-## Samba 登录失败 
+## Samba 可能的失败 
 
 - CentOS-linux 防火墙
 
@@ -160,6 +160,10 @@
 参考 http://blog.51cto.com/kmt1994/1841489
 
 这个跟防火墙无关 (Ubuntu 防火墙是 ufw，ufw enable 之后也能链接成功)
+
+- Windows 能访问 samba，能把共享里面的文件拷贝出来（即能读取），但是不能创建文件，创建目录（即写入），提示访问被拒绝
+
+请 `pdbedit -L` 查看 samba 用户，如果没有你登陆 samba 的用户，就用 `pdbedit -a <>` 加入你的用户就可以了。
 
 ## Samba 资料
 
