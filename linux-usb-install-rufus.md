@@ -24,6 +24,7 @@
 按照这个链接能解决安装问题
 
 https://www.cnblogs.com/freeweb/p/5213877.html
+
 https://blog.csdn.net/alex_my/article/details/78711850
 
 但是不能指望每次都这样做，这是在增加安装步骤，那么我们制作的USB是那里不正确呢？
@@ -32,7 +33,7 @@ https://blog.csdn.net/alex_my/article/details/78711850
 
 1 指定一个合法的USB卷标名字，比如 CentOS，CentOS7 都是合法的，CentOS 7 是非法的
 
-2 同时在以下文件中 `hd:LABEL=` 都写USB卷标
+2 同时在以下文件中 `hd:LABEL=` 都写上一步做的USB卷标
 ```
 /Volumes/EULEROS/isolinux/isolinux.cfg
 /Volumes/EULEROS/EFI/BOOT/grub.cfg
