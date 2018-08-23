@@ -1,3 +1,14 @@
+### Docker gdb 
+
+container 中运行进程 test，宿主机为 A，一台 Windows 办公机器有 test 代码，能 ssh A，
+
+通过 VisualStudio gdb 无法加断点，test 在A上运行，VS远程断点都正常。
+
+尝试在 docker run 后面加 `--privileged --cap-add=SYS_PTRACE --security-opt seccomp=unconfined `
+
+都无效。
+
+
 ### Docker 版本变迁
 ---
 http://www.imooc.com/article/16906
