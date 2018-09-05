@@ -151,4 +151,4 @@ service docker restart
 
 ### 容器磁盘占用空间
 
-`docker ps -a`
+`docker ps -s`
