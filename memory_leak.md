@@ -128,7 +128,7 @@ https://github.com/google/sanitizers/wiki/AddressSanitizer
    `export  LD_LIBRARY_PATH=/usr/lib/clang/3.8.0/lib/linux & make -j8`
 	 
   c. 运行时加前缀 
-  `SAN_OPTIONS=halt_on_error=0` 抛出问题后不停止运行
+  `ASAN_OPTIONS=halt_on_error=0` 抛出问题后不停止运行
   
   gcc-5:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/5/libasan.so` ，
   gcc-6:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6/libasan.so` / `LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6.2.0/libasan.so` ，
@@ -161,7 +161,7 @@ x[4]=9;
 
 ## valgrind 
 
-valgrind --trace-children=yes --leak-check=full --log-file=$PWD/valgrind.log --tool=memcheck --verbose
+valgrind --trace-children=yes --leak-check=full --log-file=$PWD/valgrind.log --tool=memcheck --verbose --show-reachable=yes ./app
 
 ```c
 
@@ -205,3 +205,5 @@ int main()
     return 0;
 }
 ```
+
+
