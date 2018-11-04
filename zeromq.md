@@ -37,7 +37,7 @@ rc = zmq_setsockopt(socks, ZMQ_LINGER, &value, sizeof(value));
 
 可以使用 `_size = sizeof(_value);  rc = zmq_getsockopt(sock, ZMQ_SNDHWM, &_value, &_size); ` 获取这个 1000 的值， 同样也能使用 zmq_setsockopt 更改这个值。
 
-不能使用 while 循环尝试，我的解决方案是：
+为了做到尽可能可靠，并且性能要保证（允许下游性能不够就丢包）不能使用 while 循环，失败就尝试，我的解决方案是：
 
 创建 sock 时
 
