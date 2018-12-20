@@ -402,3 +402,15 @@ make -j8
 ```
 
 or direct download binary from https://cmake.org/files/v3.10/cmake-3.10.1-Linux-x86_64.tar.gz
+
+
+
+## package the build generate file
+#### use tar.gz filename as uncompress parent directory
+set(package_file "${GIT_SHA1}.tar.gz")
+add_custom_target(pack ALL 
+    COMMAND ${CMAKE_COMMAND} -E remove -f ${package_file}
+    COMMAND tar cfvz ${package_file} 
+    --transform "s,^\.,${GIT_SHA1},"
+    --directory ${CMAKE_CURRENT_LIST_DIR}/.. ./conf ./bin ./tool)
+add_dependencies(pack ${self_binary_name})
