@@ -19,7 +19,7 @@
 
     #define errno_read_broken(no) ((no) == ENOTCONN || (no) == ECONNRESET)
     #define errno_write_broken(no) ((no) == EPIPE || (no) == ECONNRESET)
-
+    ECONNRESET 应该被定义为 read write broken
     1、readev 处理
       a) 判断是否是 SSL && SSL_in_accept_init 如果是则 SSL_accept 
       b) 是否有 EPOLLIN | EPOLLPRI | EPOLLRDHUP
