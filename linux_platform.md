@@ -1,18 +1,14 @@
 
 
-# UDP
+# Reboot
 
-## 使用纯 linux 命令收发 UDP 报文
-
+## 需求：找到本次服务器重启时间，且重启前是谁最后一次ssh登陆
 ```shell
-exec 3<>/dev/udp/127.0.0.1/5678
-echo "hello" >&3
-cat <&3
+less /var/log/messages
+last reboot | head -10
 ```
-
-`netcat` 是更好的工具，但是需要 `yum -y install nc` 来安装。
-
 # Disk
+
 
 ## Back disk space when deleted file
 
@@ -22,6 +18,7 @@ cat <&3
 
 ## Mount New Drive
 
+参考做成功过 [CentOS如何挂载磁盘] https://yjph83.iteye.com/blog/2252455
 
 ## Delete File
 

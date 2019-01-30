@@ -26,3 +26,7 @@
 [gscript] https://github.com/gen0cide/gscript
 
 [A type deaf ini parser written with flex and bison] https://github.com/matutter/libini
+
+[Lexer for Go ] https://github.com/blynn/nex  http://www-cs-students.stanford.edu/~blynn//nex/
+
+[Instaparse] https://github.com/Engelberg/instaparse
