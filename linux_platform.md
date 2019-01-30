@@ -1,4 +1,17 @@
 
+
+# UDP
+
+## 使用纯 linux 命令收发 UDP 报文
+
+```shell
+exec 3<>/dev/udp/127.0.0.1/5678
+echo "hello" >&3
+cat <&3
+```
+
+`netcat` 是更好的工具，但是需要 `yum -y install nc` 来安装。
+
 # Disk
 
 ## Back disk space when deleted file
@@ -151,11 +164,43 @@ A 与 B 互通， B 与 C 互通， A 无法与 C 互通。
 若要 做到 A 能访问 C ，如访问为 IP-C:PORT-c 要在 B 中增加映射 IP-B:PORT-B -> IP-C:PORT-C
 且在 A 中要更改访问为 IP-B:PORT-B , PORT-B 为在 B 中增加的端口。
 
+## ssh tunnel
 
+我能直接访问机器 A ，A能访问机器B
+
+我想做到在我的机器上直接 ssh 访问机器B，需要打隧道
+
+出现错误
+```
+[root@localhost ~]# channel 3: open failed: administratively prohibited: open failed
+```
+修改 `/etc/ssh/sshd_config`
+```
+AllowTcpForwarding yes
+PermitTunnel yes
+```
+都无效
+
+需要机器 A B 都打开 `AllowTcpForwarding yes`
+
+
+https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot
+这个图画的很好看，就是没看懂
+
+## rinetd tunnel
+
+ssh 复杂 ，试试 `rinetd`
+https://centos.pkgs.org/7/nux-misc-x86_64/rinetd-0.62-9.el7.nux.x86_64.rpm.html
+
+```
+vim /etc/rinetd.conf
+0.0.0.0 33  <目标机器> 22
+systemctl restart rinetd
+```
 
 # Can Use `memcpy` on `pthread_mutex_t` ?
 
-
+`
 # Dynamic library path / Rpath
 
 ld.so.cache

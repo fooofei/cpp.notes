@@ -13,7 +13,7 @@
 
   有什么办法能不被打断呢
 
-  gdb 中是 handle SIGPIPE nostop noprint pass 
+  gdb 中是 `handle SIGPIPE nostop noprint pass`
 
   http://ahlamnote.blogspot.com/2006/12/gdb-ignore-sigpipe.html
 
