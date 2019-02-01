@@ -5,7 +5,7 @@ find the program's memory leak
 
 Open AppVerify, add the to seed program to the list, and just run program.
 
-If use AppVerify, program not use multi-thread.
+**LIMIT**: If use AppVerify, program not use multi-thread.
 
 
 ## Windows gflags
@@ -32,31 +32,31 @@ PVS-Studio, Dr.Memory
 
 
 
-## Linux
+## Linux-mtrace
 
-一个想法: strace 能追踪进程执行过程中的 syscall (系统调用)， malloc free 是其中的一部分，
+一个想法: `strace` 能追踪进程执行过程中的 `syscall` (系统调用)， malloc free 是其中的一部分，
 
-但是输出的结果只有地址，没有文件行号，我们追踪 malloc 还是要对应到行号的，有说法是可以用
+但是输出的结果只有地址，没有文件行号，我们追踪 `malloc` 还是要对应到行号的，有说法是可以用
 
-addr2line 解决这个问题，比如这里 https://stackoverflow.com/questions/6806037/line-number-info-in-ltrace-and-strace-tools
+`addr2line` 解决这个问题，比如这里 https://stackoverflow.com/questions/6806037/line-number-info-in-ltrace-and-strace-tools
 
-我试了，没成功， addr2line 输出总是 ?? ，即便我是 -g 不带 -O0/-O2 编译代码，也不行。
+我试了，没成功， `addr2line` 输出总是 ?? ，即便我是 `-g` 不带 `-O0/-O2` 编译代码，也不行。
 
 
-但是 mtrace 这个工具倒是值得一试，对于服务端性质的进程，即无明显 exit 的进程也是适用的。
+但是 `mtrace` 这个工具倒是值得一试，对于服务端性质的进程，即无明显 `exit` 的进程也是适用的。
 
-如果没有 mtrace 这个命令，要使用 # yum -y install glibc-utils 安装。
+如果没有 `mtrace` 这个命令，要使用 `# yum -y install glibc-utils` 安装。
 
 C 代码例子和运行要点见 http://man7.org/linux/man-pages/man3/mtrace.3.html
 
-运行进程前要设置 MALLOC_TRACE 环境变量，接下来是运行进程，运行过程中的  malloc alloc free 都会记入 MALLOC_TRACE 变量中的值中，
+运行进程前要设置 `MALLOC_TRACE` 环境变量，接下来是运行进程，运行过程中的  `malloc alloc free` 都会记入 `MALLOC_TRACE` 变量中的文件中，
 
-它是一个文件，因为进程可能是服务端程序，无法确定 exit 时间，所以自己判断时机合适就可以了，然后使用 mtrace 命令把刚才的文件作为输入，
+它是一个文件，因为进程可能是服务端程序，无法确定 `exit` 时间，所以自己判断时机合适就可以了，然后使用 `mtrace`  命令把刚才的文件作为输入，
 
 它会扫描一遍这个文件，找出那些地址的内存还没得到释放，并且给出该内存申请的代码文件和行号。
 
 
-还尝试了 strace-plus https://github.com/pgbovine/strace-plus 不会用，它说它的功能已经放到了 strace 里，
+还尝试了 `strace-plus` https://github.com/pgbovine/strace-plus 不会用，它说它的功能已经放到了 `strace` 里，
 
 Version>4.9 上，选项为 -k 我用了这个版本，但是没有 -k 选项。只能放弃了。
 
@@ -97,49 +97,84 @@ https://github.com/google/sanitizers/wiki/AddressSanitizer
 
 ### 支持哪些编译器
 
-支持版本  Clang (3.3+) and GCC (4.8+). 还是 gcc6 更好，建议升级到最新版本。
+支持版本  `Clang (3.3+)` and `GCC (4.8+)`. 还是 `gcc6` 更好，建议升级到最新版本。
 
 ### 单二进制
 
-你的程序仅仅是一个二进制（可执行程序），比如最简单的 `g++ 1.c` ,
-~~~
-那么就在编译的时候加 `-fsanitize=address`, 最终为 `g++ -fsanitize=address  1.c`.
-~~~
+    你的程序仅仅是一个二进制（可执行程序），比如最简单的 `g++ 1.c` ,
+
+    那么就在编译的时候加 `-fsanitize=address`, 最终为 `g++ -fsanitize=address  1.c`.
+
+    也是需要加 `-lasan` ，在 `clang`中就是 `libclang_rt.asan-x86_64.a`
+
+
+    clang 使用历程
+    编译 clang （要带 asan）
+
+    下载 llvm clang compiler-rt(携带asan) extra  暂时不安装 libcxx libcxxabi
+    cmake -DCMAKE_BUILD_TYPE=Release ..
+    make -j60
+    make DESTDIR=$PWD/myoutput install
+    
+    在 myoutput 就有clang 的生成文件了，然后我们就可以绿色使用
+    
+    但是一使用就报错 
+    编译一个简单的文件报错误 
+    /..//bin/ld: cannot find crtbegin.o: 没有那个文件或目录
+    /..//bin/ld: cannot find -lgcc
+    /..//bin/ld: cannot find -lgcc_s
+
+    要在使用的机器上
+    ln -s /usr/lib/gcc/4.8.2/crtbegin.o /usr/lib64
+    ln -s /usr/lib/gcc/4.8.2/crtend.o /usr/lib64
+    ln -s /usr/lib/gcc/4.8.2/libgcc.a /usr/lib64
+    ln -s /usr/lib64/libgcc_s.so.1 /usr/lib64/libgcc_s.so
+    
+    然后CMake 编译我们的目标程序
+    link_directories(/xxx/myoutput/usr/local/lib/clang/7.0.1/lib/linux)
+    target_compile_options(${self_binary_name} PRIVATE -fno-omit-frame-pointer -fsanitize=address)
+    target_link_libraries(${self_binary_name} libclang_rt.asan-x86_64.a) 
+    target_link_libraries(${self_binary_name} rt) # for asan 
+
+    memory sanitize 就是 libclang_rt.msan-x86_64.a
+
+    cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/xxxx/myoutput/usr/local/bin/clang ..
+
 
 
 ### 二进制 + 动态库(.so)
 
-程序运行模式是 二进制（可执行程序）+动态库 .so ，我们想要分析动态库 so 文件。
-~~~
+程序运行模式是 二进制（可执行程序）+动态库 `.so` ，我们想要分析动态库 `so` 文件。
+
 那么 
 
-  a. 在编译 so 文件时，加如下参数
-  
-  `CXXFLAGS+= -O1 -g -DNDEBUG  -fsanitize=address`
-  gcc-6: `-fsanitize-recover=address` 定位到 1 个问题后可以不停止运行，继续运行当前程序
-  
-	
-  b. 链接 .o 文件为 .so 文件的时候，加 
-  
-  `-g -fno-omit-frame-pointer -fsanitize=address -fsanitize-recover=address -lasan`
-  
-   链接后要使用 `ldd -r [.so path]` 查看生成的 so 文件是否有符号未链接，如果有asan的，要回到 a， 重新编译，加前缀
-	 
-   `export  LD_LIBRARY_PATH=/usr/lib/clang/3.8.0/lib/linux & make -j8`
-	 
-  c. 运行时加前缀 
-  `ASAN_OPTIONS=halt_on_error=0` 抛出问题后不停止运行
-  
-  gcc-5:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/5/libasan.so` ，
-  gcc-6:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6/libasan.so` / `LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6.2.0/libasan.so` ，
-  
-  这个 so 的路劲要自己找。
+    a. 在编译 so 文件时，加如下参数
     
-	出现异常时，看不到出现异常的代码文件和行号，则运行时，继续增加前缀 
-	
-    `ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.8 ASAN_OPTIONS=symbolize=1`
-~~~
-
+    CXXFLAGS+= -O1 -g -DNDEBUG  -fsanitize=address
+    额外选项 gcc-6: -fsanitize-recover=address 定位到 1 个问题后可以不停止运行，继续运行当前程序
+    
+    
+    b. 链接 .o 文件为 .so 文件的时候，加 
+    
+    -g -fno-omit-frame-pointer -fsanitize=address -fsanitize-recover=address -lasan
+    
+     链接后要使用 ldd -r [.so path] 查看生成的 so 文件是否有符号未链接，如果有asan的，要回到 a， 重新编译，加前缀
+     
+     `export  LD_LIBRARY_PATH=/usr/lib/clang/3.8.0/lib/linux & make -j8`
+     
+    c. 运行时加前缀 
+    
+    ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.8 ASAN_OPTIONS=symbolize=1 ASAN_OPTIONS=detect_leaks=1 ASAN_OPTIONS=halt_on_error=0 ./test
+    
+    gcc-5:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/5/libasan.so` ，
+    gcc-6:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6/libasan.so` / `LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6.2.0/libasan.so` ，
+    
+    这个 so 的路径要自己找。
+    
+    -fsanitize=address 如果变更为 -fsanitize-memory ，这里 ASAN 也要变为 MSAN
+    
+    msan 使用成本高到我负担不起，要 libstd++ 也要带 msan 编译选项编译，不然就出现很奇怪的报错。
+    
 ### 缺陷
 ~~~c++
 无法检测栈空间越界
