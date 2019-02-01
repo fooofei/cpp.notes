@@ -1,5 +1,22 @@
 
 
+# TotalCommand
+
+total command's plugin `VisualDirSize` can the a directory's sub files count of every sub directory.
+
+use `CTRL+Q` to use the plugin
+
+# Batch CurDir
+
+这一步是为了切换磁盘，比如现在在 C 盘， cd 到 D 盘某个目录是失败的。
+
+需要先切到 D 盘，才能到 D 盘中某个目录。
+```
+%~d0
+cd /d %~dp0
+```
+
+
 # CNTLM
 
 ### 使用背景：
@@ -19,9 +36,6 @@
   MS-DOS style path detected: D:\Program Files (x86)\Cntlm\cntlm.ini
   Preferred POSIX equivalent is: /Cntlm/cntlm.ini
 不能改为 c:\cntlm 也不能改为 d:\program files\
-
-#### linux
-
 
 ### 使用
  获取认证信息 用来填充 cntlm.ini 文件

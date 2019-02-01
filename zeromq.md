@@ -1,19 +1,17 @@
 
 
-### ZeroMQ
+### ZeroMQ 复用 sock
 
-使用 ZeroMQ 通信，注意的问题：
-
-1 在服务端程序中，如果要刷新zmq sock 的地址(endpoint) ，不能使用 zmq_socket()，而应该复用 sock ，使用 zmq_disconnect，因为 zmq_close 并不能真正做到释放 socket 资源，
+ 在服务端程序中，如果要刷新 zmq sock 的地址(`endpoint`) ，不能使用 `zmq_socket()`，而应该复用 sock ，使用 `zmq_disconnect`，因为 `zmq_close` 并不能真正做到释放 `socket` 资源，
 
 这样就有资源耗尽的风险。
 
 我使用的解决方案是：
 
-对于获得更新的 url 则：
+有旧的（正在使用的）`endpoint` 和新的`endpoint`，则
 
-```
-if(sock 创建过)
+```c
+if(sock 没有创建过)
 {
     创建 sock
 }
@@ -30,8 +28,9 @@ rc = zmq_setsockopt(socks, ZMQ_LINGER, &value, sizeof(value));
 
 ```
 
+## ZMQ 传递业务数据
 
-2 `zmq_send(sock, data, data_size, ZMQ_DONTWAIT);` 是非阻塞发送，放入 zmq 发送缓冲队列之后即刻返回结果，或者无法放入队列，即可返回失败。
+ `zmq_send(sock, data, data_size, ZMQ_DONTWAIT);` 是非阻塞发送，放入 zmq 发送缓冲队列之后即刻返回结果，或者无法放入队列，即可返回失败。
 
 如果是无法放入队列，那么返回错误码为 EAGAIN =11,  Resource temporarily unavailable，队列默认 1000，也就是有 1000 个未发送的，就会在 1001 失败。
 

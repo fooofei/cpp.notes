@@ -1,4 +1,4 @@
-### Docker gdb 
+### Docker gdb attach
 
 container 中运行进程 test，宿主机为 A，一台 Windows 办公机器有 test 代码，能 ssh A，
 
@@ -14,6 +14,11 @@ container 中运行进程 test，宿主机为 A，一台 Windows 办公机器有
 http://www.imooc.com/article/16906
 
 suse 的 docker 叫 suse/sles11sp3:latest   https://github.com/SUSE/sle2docker
+
+The new docker name is `Docker CE`, old name is `Docker` or `Docker Engine`.
+
+[CentOS 安装 Docker CE] https://yeasy.gitbooks.io/docker_practice/content/install/centos.html
+
 
 ### docker proxy
 
