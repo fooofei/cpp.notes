@@ -1,3 +1,26 @@
+
+
+### DPDK in Docker
+
+DPDK 使用的是硬件资源，因此 Docker就显得多余。
+
+如果Docker是需求，那么要把 Host 的某些资源与 Docker 共享。
+
+```
+docker run -d -it --restart=no \
+  --privileged -v /sys/bus/pci/devices:/sys/bus/pci/devices \
+  -v /sys/kernel/mm/hugepages:/sys/kernel/mm/hugepages \
+  -v /sys/devices/system/node:/sys/devices/system/node \
+  -v /dev:/dev -v /data:/data  \
+  -v /home:/home \
+  --name=<> \
+  --env <> $image_name \
+  /home/helloworld
+```
+
+`/dev` 是因为 DPDK master slave 分别，master 会在 `/var/run` 建立磁盘文件用于各进程共享。
+
+
 ### Docker gdb attach
 
 container 中运行进程 test，宿主机为 A，一台 Windows 办公机器有 test 代码，能 ssh A，
