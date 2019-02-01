@@ -1,1 +1,0 @@
-`$(dirname $(readlink -f $0))`
