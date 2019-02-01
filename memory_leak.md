@@ -160,14 +160,14 @@ https://github.com/google/sanitizers/wiki/AddressSanitizer
     
      链接后要使用 ldd -r [.so path] 查看生成的 so 文件是否有符号未链接，如果有asan的，要回到 a， 重新编译，加前缀
      
-     `export  LD_LIBRARY_PATH=/usr/lib/clang/3.8.0/lib/linux & make -j8`
+     export  LD_LIBRARY_PATH=/usr/lib/clang/3.8.0/lib/linux & make -j8
      
     c. 运行时加前缀 
     
     ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.8 ASAN_OPTIONS=symbolize=1 ASAN_OPTIONS=detect_leaks=1 ASAN_OPTIONS=halt_on_error=0 ./test
     
-    gcc-5:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/5/libasan.so` ，
-    gcc-6:`LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6/libasan.so` / `LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6.2.0/libasan.so` ，
+    gcc-5: LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/5/libasan.so ，
+    gcc-6: LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6/libasan.so / `LD_PRELOAD=/usr/lib/gcc/x86_64-linux-gnu/6.2.0/libasan.so ，
     
     这个 so 的路径要自己找。
     
