@@ -7,7 +7,7 @@
 1、一般的代码模式：
   模块级别 LoadLibrary -> GetProcAddress 
     
-    实例级别 -> CreateInstance ->AddRef -> Release 
+  实例级别 -> CreateInstance ->AddRef -> Release 
   模块级别 ->FreeLibrary
   
   也就是说，显示 Load 模块，然后从模块中创建实例，使用实例，
