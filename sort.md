@@ -71,6 +71,23 @@ func (s MyInts) Less(i, j int) bool {
 sort.Sort(MyInts(vec))
 ```
 
+虽然 C++ 和 Golang 的比较函数同样的升序都是 `<` 比较，但是含义却相反。
+
+如果做到升序，`first < last`，C++ 是说
+```cpp
+cmp(后，前)
+{
+    return 前 > 后;
+}
+然后满足的就发生交换
+```
+Golang 是
+```golang
+cmp(前，后)
+{
+    return 前 < 后
+}
+```
 
 ### 降序
 ```golang
