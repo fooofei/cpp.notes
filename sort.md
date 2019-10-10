@@ -3,7 +3,13 @@
 ## C++ 如何使用 Sort
 
 
-⚠️ 比较函数的 `last` `first` 顺序。
+⚠️ 注意比较函数的 `last` `first` 顺序
+
+```c++
+struct data_t {
+    int data;
+};
+```
 
 ### 升序
 

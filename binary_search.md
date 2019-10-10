@@ -16,6 +16,7 @@
 API
 ```golang
 sort.Search 
+返回值是索引
 ```
 重要部分
 ```golang
