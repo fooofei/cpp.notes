@@ -7,7 +7,7 @@
 二分查找的代码影响因素有
 
 - 升序降序 
-- 比较函数返回值 true/false (大于小于等于)
+- 比较函数返回值 true/false (即 大于小于等于)
 
 ⚠️ 排列顺序和比较函数不能交叉使用
 
@@ -60,7 +60,7 @@ F T T T T
 
 有序序列为升序时，应使用 `>` `>=`
 ```golang
-cmp=func(i) {
+cmp = func(i) {
     return a[i] >= 4
 }
 ```
@@ -111,3 +111,7 @@ if !cmp(target, mid) {
 
 
 ⚠️ `lower_bound` 和 `upper_bound` 的 `cmp` 参数位置是相反的
+
+因为 C++ 没有 Golang 那样闭包的语言特性，导致 func 的两个参数位置变化，
+
+会引起比较结果的不同，C++ 的比较也因此更复杂。
