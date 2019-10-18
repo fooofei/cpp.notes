@@ -105,7 +105,14 @@ upper_bound()
 ...
 if !cmp(target, mid) {
     i= mid+1;
+} 
+
+在一个升序序列上找 x
+
+bool cmp(target, mid) {
+    return mid >= target;
 }
+
 ...
 ```
 
