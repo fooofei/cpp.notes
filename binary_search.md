@@ -105,6 +105,9 @@ upper_bound()
 ...
 if !cmp(target, mid) {
     i= mid+1;
+    // MSVC first = _Next_iter(mid);
+    // MAC __first = ++__m;
+    // 都是 mid + 1
 } 
 
 在一个升序序列上找 x
